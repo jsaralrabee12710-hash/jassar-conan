@@ -1,0 +1,3777 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <link rel="icon" type="image/png" href="logo.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حلقات كونان الجديدة | GG Gaming</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    <style>
+        :root {
+            --bg: #03040d;
+            --bg2: #060819;
+            --surface: #0c1022;
+            --surface2: #101428;
+            --surface3: #141930;
+            --red: #e8192c;
+            --red-dim: rgba(232, 25, 44, 0.1);
+            --red-glow: rgba(232, 25, 44, 0.45);
+            --red-soft: rgba(232, 25, 44, 0.06);
+            --blue: #1a6faa;
+            --blue-bright: #2589cc;
+            --gold: #f5c518;
+            --gold-dim: rgba(245, 197, 24, 0.12);
+            --text: #eef2ff;
+            --text2: #c8d0e8;
+            --muted: #6b7a99;
+            --muted2: #4a566e;
+            --border: rgba(255, 255, 255, 0.05);
+            --border2: rgba(255, 255, 255, 0.09);
+            --border3: rgba(255, 255, 255, 0.14);
+            --radius: 18px;
+            --radius-sm: 11px;
+            --radius-xs: 8px
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            min-height: 100vh
+        }
+
+        /* Light Theme Colors */
+        :root {
+            --light-bg: #f0f2f5;
+            --light-bg2: #ffffff;
+            --light-surface: #ffffff;
+            --light-surface2: #f8f9fa;
+            --light-surface3: #e9ecef;
+            --light-text: #212529;
+            --light-muted: #6c757d;
+            --light-muted2: #adb5bd;
+            --light-border: rgba(0, 0, 0, 0.08);
+            --light-border2: rgba(0, 0, 0, 0.12);
+            --light-border3: rgba(0, 0, 0, 0.18);
+        }
+
+        body.light-theme {
+            --bg: var(--light-bg);
+            --bg2: var(--light-bg2);
+            --surface: var(--light-surface);
+            --surface2: var(--light-surface2);
+            --surface3: var(--light-surface3);
+            --text: var(--light-text);
+            --text2: #343a40;
+            --muted: var(--light-muted);
+            --muted2: var(--light-muted2);
+            --border: var(--light-border);
+            --border2: var(--light-border2);
+            --border3: var(--light-border3);
+            --red-dim: rgba(232, 25, 44, 0.05);
+            --gold-dim: rgba(245, 197, 24, 0.06);
+            --blue-dim: rgba(26, 111, 170, 0.05);
+        }
+
+        .theme-toggle {
+            width: 38px;
+            height: 38px;
+            background: var(--surface);
+            border: 1px solid var(--border2);
+            border-radius: 9px;
+            color: var(--muted);
+            font-size: 1rem;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: .25s;
+            flex-shrink: 0;
+            display: flex
+        }
+
+        .theme-toggle:hover {
+            color: var(--text);
+            border-color: var(--border3)
+        }
+
+        .theme-toggle i.fa-sun {
+            color: var(--gold)
+        }
+
+        #scrollProgress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--red), #ff4466, var(--gold));
+            z-index: 99998;
+            width: 0;
+            will-change: width;
+            transition: width 80ms linear;
+            box-shadow: 0 0 12px var(--red-glow)
+        }
+
+        #intro {
+            position: fixed;
+            inset: 0;
+            background: var(--bg);
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 28px;
+            transition: opacity .8s ease, visibility .8s ease
+        }
+
+        #intro.hide {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none
+        }
+
+        .intro-logo {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, #c00 0%, var(--red) 50%, #ff3347 100%);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: -1px;
+            box-shadow: 0 0 60px rgba(232, 25, 44, 0.65), 0 0 120px rgba(232, 25, 44, 0.2);
+            animation: introPulse 1.3s ease-in-out infinite
+        }
+
+        @keyframes introPulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 60px rgba(232, 25, 44, 0.65), 0 0 120px rgba(232, 25, 44, 0.2);
+                transform: scale(1)
+            }
+
+            50% {
+                box-shadow: 0 0 90px rgba(232, 25, 44, 0.9), 0 0 180px rgba(232, 25, 44, 0.35);
+                transform: scale(1.07)
+            }
+        }
+
+        .intro-text {
+            color: var(--muted);
+            font-size: .8rem;
+            letter-spacing: 4px;
+            text-transform: uppercase
+        }
+
+        .intro-bar {
+            width: 180px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.07);
+            border-radius: 2px;
+            overflow: hidden
+        }
+
+        .intro-fill {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, var(--red), #ff4466);
+            animation: introFill 2s ease forwards .2s
+        }
+
+        @keyframes introFill {
+            to {
+                width: 100%
+            }
+        }
+
+        #particles {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none
+        }
+
+        .ambient {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden
+        }
+
+        .ambient::before {
+            content: '';
+            position: absolute;
+            top: -25%;
+            right: -15%;
+            width: 75vw;
+            height: 75vw;
+            background: radial-gradient(circle, rgba(232, 25, 44, 0.055) 0%, transparent 65%);
+            animation: ambPulse 9s ease-in-out infinite alternate
+        }
+
+        .ambient::after {
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            left: -10%;
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, rgba(26, 111, 170, 0.05) 0%, transparent 65%);
+            animation: ambPulse 12s ease-in-out infinite alternate-reverse
+        }
+
+        @keyframes ambPulse {
+            to {
+                transform: scale(1.18) rotate(5deg)
+            }
+        }
+
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 900;
+            height: 64px;
+            background: rgba(3, 4, 13, 0.92);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            gap: 12px
+        }
+
+        .nav-line {
+            position: absolute;
+            bottom: -1px;
+            left: 8%;
+            right: 8%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--red-glow), transparent);
+            opacity: .35
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            flex-shrink: 0
+        }
+
+        .logo-icon {
+            width: 34px;
+            height: 34px;
+            background: linear-gradient(135deg, #b00 0%, var(--red) 100%);
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .72rem;
+            font-weight: 900;
+            color: #fff;
+            box-shadow: 0 0 14px var(--red-glow)
+        }
+
+        .logo-text {
+            font-weight: 900;
+            font-size: 1.05rem;
+            letter-spacing: .5px
+        }
+
+        .logo-text span {
+            color: var(--red)
+        }
+
+        .search-wrap {
+            flex: 1;
+            max-width: 420px;
+            position: relative
+        }
+
+        .search-wrap i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--muted);
+            font-size: .8rem;
+            pointer-events: none
+        }
+
+        .search-wrap input {
+            width: 100%;
+            padding: 10px 16px 10px 42px;
+            background: var(--surface);
+            border: 1px solid var(--border2);
+            border-radius: var(--radius-sm);
+            color: var(--text);
+            font-family: 'Cairo', sans-serif;
+            font-size: .87rem;
+            outline: none;
+            transition: .3s
+        }
+
+        .search-wrap input::placeholder {
+            color: var(--muted)
+        }
+
+        .search-wrap input:focus {
+            border-color: var(--red);
+            background: rgba(232, 25, 44, 0.03);
+            box-shadow: 0 0 0 3px rgba(232, 25, 44, 0.08)
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border2);
+            color: var(--muted);
+            text-decoration: none;
+            font-size: .83rem;
+            font-weight: 600;
+            white-space: nowrap;
+            transition: .25s;
+            flex-shrink: 0
+        }
+
+        .nav-link:hover {
+            color: var(--text);
+            border-color: var(--border3);
+            background: var(--surface)
+        }
+
+        .nav-link.active-page {
+            color: var(--red);
+            border-color: rgba(232, 25, 44, 0.3);
+            background: var(--red-dim)
+        }
+
+        .hamburger {
+            display: none;
+            width: 38px;
+            height: 38px;
+            background: var(--surface);
+            border: 1px solid var(--border2);
+            border-radius: 9px;
+            color: var(--muted);
+            font-size: 1rem;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: .25s;
+            flex-shrink: 0
+        }
+
+        .hamburger:hover {
+            color: var(--text);
+            border-color: var(--border3)
+        }
+
+        .mobile-drawer {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 280px;
+            height: 100vh;
+            background: rgba(8, 10, 26, 0.98);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            z-index: 950;
+            border-left: 1px solid var(--border2);
+            padding: 80px 24px 24px;
+            transition: right .35s cubic-bezier(.4, 0, .2, 1);
+            display: flex;
+            flex-direction: column;
+            gap: 8px
+        }
+
+        .mobile-drawer.open {
+            right: 0
+        }
+
+        .drawer-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 949;
+            opacity: 0;
+            visibility: hidden;
+            transition: .3s
+        }
+
+        .drawer-overlay.open {
+            opacity: 1;
+            visibility: visible
+        }
+
+        .drawer-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 18px;
+            border-radius: var(--radius-sm);
+            color: var(--text2);
+            text-decoration: none;
+            font-size: .9rem;
+            font-weight: 600;
+            transition: .2s;
+            border: 1px solid transparent
+        }
+
+        .drawer-link:hover,
+        .drawer-link.active {
+            background: var(--red-dim);
+            color: var(--red);
+            border-color: rgba(232, 25, 44, 0.2)
+        }
+
+        .drawer-link.active {
+            border-color: rgba(232, 25, 44, 0.3)
+        }
+
+        .drawer-link i {
+            width: 20px;
+            text-align: center;
+            font-size: .9rem
+        }
+
+        .drawer-divider {
+            height: 1px;
+            background: var(--border2);
+            margin: 8px 0
+        }
+
+        .drawer-shortcuts {
+            padding: 14px 18px;
+            color: var(--muted2);
+            font-size: .72rem;
+            line-height: 2
+        }
+
+        .drawer-shortcuts kbd {
+            padding: 1px 7px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border2);
+            border-radius: 4px;
+            font-family: 'Cairo', sans-serif;
+            font-size: .65rem;
+            color: var(--muted);
+            margin: 0 2px
+        }
+
+        .drawer-close {
+            position: absolute;
+            top: 18px;
+            left: 18px;
+            width: 34px;
+            height: 34px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border2);
+            border-radius: 50%;
+            color: var(--muted);
+            font-size: .85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: .25s
+        }
+
+        .drawer-close:hover {
+            background: var(--red);
+            color: #fff;
+            border-color: var(--red)
+        }
+
+        .hero {
+            position: relative;
+            padding: 120px 5% 100px;
+            text-align: center;
+            overflow: hidden
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: url('https://images.alphacoders.com/131/1319434.jpg') center/cover no-repeat;
+            filter: brightness(0.14) saturate(0.5)
+        }
+
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(3, 4, 13, 0.15) 0%, rgba(3, 4, 13, 0.55) 55%, var(--bg) 100%)
+        }
+
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0, 0, 0, 0.05) 3px, rgba(0, 0, 0, 0.05) 4px)
+        }
+
+        .hero-inner {
+            position: relative;
+            z-index: 2
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--red-dim);
+            border: 1px solid rgba(232, 25, 44, 0.22);
+            color: var(--red);
+            padding: 6px 22px;
+            border-radius: 50px;
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            margin-bottom: 26px
+        }
+
+        .hero-tag i {
+            animation: spinTag 3s linear infinite
+        }
+
+        @keyframes spinTag {
+            to {
+                transform: rotate(360deg)
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Tajawal', sans-serif;
+            font-size: clamp(2.4rem, 7vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.07;
+            margin-bottom: 14px;
+            letter-spacing: -1.5px
+        }
+
+        .hero h1 .accent {
+            color: var(--red);
+            text-shadow: 0 0 50px rgba(232, 25, 44, 0.6), 0 0 100px rgba(232, 25, 44, 0.2);
+            position: relative;
+            display: inline-block;
+            overflow: hidden
+        }
+
+        .hero h1 .accent::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 55%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            animation: shimmer 4.5s ease-in-out infinite
+        }
+
+        @keyframes shimmer {
+            0% {
+                left: -100%
+            }
+
+            100% {
+                left: 260%
+            }
+        }
+
+        .hero-sub {
+            color: var(--muted);
+            font-size: 1rem;
+            margin-bottom: 40px;
+            font-weight: 400;
+            opacity: .9
+        }
+
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            margin-bottom: 16px;
+            flex-wrap: wrap
+        }
+
+        .stat {
+            padding: 16px 36px;
+            border-right: 1px solid rgba(255, 255, 255, 0.07);
+            text-align: center
+        }
+
+        .stat:last-child {
+            border-right: none
+        }
+
+        .stat-num {
+            display: block;
+            font-size: 2.1rem;
+            font-weight: 900;
+            color: var(--text);
+            line-height: 1;
+            font-family: 'Tajawal', sans-serif
+        }
+
+        .stat-num.red {
+            color: var(--red)
+        }
+
+        .stat-label {
+            font-size: .7rem;
+            color: var(--muted);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-top: 5px
+        }
+
+        .progress-wrap {
+            max-width: 400px;
+            margin: 0 auto 40px;
+            text-align: center
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: .7rem;
+            color: var(--muted2);
+            margin-bottom: 6px
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 4px;
+            overflow: hidden
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--red), #ff4466, var(--gold));
+            border-radius: 4px;
+            transition: width 1.5s cubic-bezier(.4, 0, .2, 1);
+            box-shadow: 0 0 10px var(--red-glow)
+        }
+
+        .countdown-section {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto 60px;
+            padding: 0 24px
+        }
+
+        .countdown-card {
+            background: linear-gradient(135deg, rgba(232, 25, 44, 0.08) 0%, rgba(12, 16, 34, 0.95) 40%, rgba(26, 111, 170, 0.07) 100%);
+            border: 1px solid rgba(232, 25, 44, 0.22);
+            border-radius: 24px;
+            padding: 36px 32px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 60px rgba(232, 25, 44, 0.08), 0 30px 80px rgba(0, 0, 0, 0.7)
+        }
+
+        .countdown-card::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: 25px;
+            background: linear-gradient(135deg, rgba(232, 25, 44, 0.2), transparent 40%, rgba(26, 111, 170, 0.1));
+            z-index: -1
+        }
+
+        .countdown-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(232, 25, 44, 0.6), rgba(255, 255, 255, 0.1), rgba(232, 25, 44, 0.6), transparent)
+        }
+
+        .cd-top {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 24px
+        }
+
+        .cd-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--red);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--red);
+            animation: cdBlink 1s ease-in-out infinite
+        }
+
+        @keyframes cdBlink {
+
+            0%,
+            100% {
+                opacity: 1;
+                box-shadow: 0 0 10px var(--red)
+            }
+
+            50% {
+                opacity: .4;
+                box-shadow: 0 0 4px var(--red)
+            }
+        }
+
+        .cd-label {
+            font-size: .75rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--red)
+        }
+
+        .cd-episode-name {
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1.45rem;
+            font-weight: 900;
+            color: var(--text);
+            margin-bottom: 8px;
+            line-height: 1.3
+        }
+
+        .cd-episode-name span {
+            color: var(--red)
+        }
+
+        .cd-subtitle {
+            color: var(--muted);
+            font-size: .83rem;
+            margin-bottom: 32px
+        }
+
+        .cd-timer {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            align-items: center;
+            flex-wrap: wrap
+        }
+
+        .cd-unit {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 20px 22px 14px;
+            min-width: 90px;
+            position: relative;
+            overflow: hidden;
+            transition: border-color .3s, background .3s
+        }
+
+        .cd-unit::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(232, 25, 44, 0.4), transparent)
+        }
+
+        .cd-unit:hover {
+            background: rgba(232, 25, 44, 0.06);
+            border-color: rgba(232, 25, 44, 0.25)
+        }
+
+        .cd-num {
+            display: block;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 900;
+            line-height: 1;
+            color: #fff;
+            text-shadow: 0 0 30px rgba(232, 25, 44, 0.4);
+            transition: all .3s
+        }
+
+        .cd-num.flip {
+            animation: numFlip .35s cubic-bezier(.34, 1.4, .64, 1)
+        }
+
+        @keyframes numFlip {
+            0% {
+                transform: translateY(-8px) scale(1.08);
+                opacity: .5
+            }
+
+            100% {
+                transform: translateY(0) scale(1);
+                opacity: 1
+            }
+        }
+
+        .cd-unit-label {
+            font-size: .65rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-top: 6px;
+            display: block
+        }
+
+        .cd-sep {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--red);
+            opacity: .5;
+            animation: sepPulse 1s ease-in-out infinite;
+            align-self: flex-start;
+            padding-top: 18px
+        }
+
+        @keyframes sepPulse {
+
+            0%,
+            100% {
+                opacity: .5
+            }
+
+            50% {
+                opacity: .15
+            }
+        }
+
+        .cd-meta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 28px;
+            flex-wrap: wrap
+        }
+
+        .cd-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--muted);
+            font-size: .78rem
+        }
+
+        .cd-meta-item i {
+            color: var(--red);
+            font-size: .85rem
+        }
+
+        .cd-done {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0
+        }
+
+        .cd-done i {
+            font-size: 3rem;
+            color: var(--gold);
+            animation: bounceIn .6s cubic-bezier(.34, 1.6, .64, 1)
+        }
+
+        @keyframes bounceIn {
+            from {
+                transform: scale(.3);
+                opacity: 0
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1
+            }
+        }
+
+        .cd-done p {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text)
+        }
+
+        .cd-done small {
+            color: var(--muted);
+            font-size: .8rem
+        }
+
+        .filter-bar {
+            position: relative;
+            z-index: 2;
+            max-width: 1520px;
+            margin: 0 auto 18px;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px
+        }
+
+        .result-info {
+            color: var(--muted);
+            font-size: .83rem
+        }
+
+        .result-info strong {
+            color: var(--red);
+            font-weight: 700
+        }
+
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap
+        }
+
+        .chips {
+            display: flex;
+            gap: 6px
+        }
+
+        .chip {
+            padding: 7px 16px;
+            background: var(--surface);
+            border: 1px solid var(--border2);
+            border-radius: 50px;
+            color: var(--muted);
+            font-size: .78rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .2s;
+            font-family: 'Cairo', sans-serif
+        }
+
+        .chip:hover,
+        .chip.active {
+            background: var(--red-dim);
+            border-color: rgba(232, 25, 44, 0.35);
+            color: var(--red)
+        }
+
+        .divider-v {
+            width: 1px;
+            height: 26px;
+            background: var(--border2)
+        }
+
+        .view-btns {
+            display: flex;
+            gap: 5px
+        }
+
+        .vbtn {
+            width: 36px;
+            height: 36px;
+            background: var(--surface);
+            border: 1px solid var(--border2);
+            border-radius: 9px;
+            color: var(--muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: .2s;
+            font-size: .8rem
+        }
+
+        .vbtn.active,
+        .vbtn:hover {
+            background: var(--red-dim);
+            border-color: rgba(232, 25, 44, 0.35);
+            color: var(--red)
+        }
+
+        .fav-filter,
+        .dub-filter {
+            padding: 7px 16px;
+            background: var(--surface);
+            border: 1px solid var(--border2);
+            border-radius: 50px;
+            color: var(--muted);
+            font-size: .78rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .2s;
+            font-family: 'Cairo', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap
+        }
+
+        .fav-filter:hover,
+        .fav-filter.active {
+            background: rgba(245, 197, 24, 0.1);
+            border-color: rgba(245, 197, 24, 0.3);
+            color: var(--gold)
+        }
+
+        .dub-filter:hover,
+        .dub-filter.active {
+            background: rgba(26, 111, 170, 0.1);
+            border-color: rgba(26, 111, 170, 0.3);
+            color: var(--blue-bright)
+        }
+
+        .shortcut-hint {
+            padding: 7px 12px;
+            background: var(--surface);
+            border: 1px solid var(--border2);
+            border-radius: 50px;
+            color: var(--muted2);
+            font-size: .7rem;
+            cursor: pointer;
+            transition: .2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-family: 'Cairo', sans-serif
+        }
+
+        .shortcut-hint:hover {
+            color: var(--text);
+            border-color: var(--border3)
+        }
+
+        .shortcut-hint kbd {
+            padding: 1px 6px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border2);
+            border-radius: 4px;
+            font-family: 'Cairo', sans-serif;
+            font-size: .6rem
+        }
+
+        .grid {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 22px;
+            max-width: 1520px;
+            margin: 0 auto 80px;
+            padding: 0 24px;
+            content-visibility: auto;
+            contain-intrinsic-size: 800px;
+        }
+
+        .grid.list {
+            grid-template-columns: 1fr
+        }
+
+        /* ═══ البطاقة — بدون overflow:hidden ═══ */
+        .card {
+            background: var(--surface);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            position: relative;
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity .55s ease, transform .55s ease, border-color .3s, box-shadow .3s;
+            will-change: auto
+        }
+
+        .card.visible {
+            opacity: 1;
+            transform: translateY(0)
+        }
+
+        .card.highlight {
+            border-color: var(--gold) !important;
+            box-shadow: 0 0 0 2px rgba(245, 197, 24, 0.2), 0 24px 70px rgba(0, 0, 0, 0.75) !important;
+            animation: highlightPulse 1.5s ease-in-out 3
+        }
+
+        @keyframes highlightPulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 2px rgba(245, 197, 24, 0.2), 0 24px 70px rgba(0, 0, 0, 0.75)
+            }
+
+            50% {
+                box-shadow: 0 0 0 4px rgba(245, 197, 24, 0.35), 0 24px 70px rgba(0, 0, 0, 0.75)
+            }
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: var(--radius);
+            background: radial-gradient(500px circle at var(--mx, 50%) var(--my, 50%), rgba(232, 25, 44, 0.07), transparent 40%);
+            opacity: 0;
+            transition: opacity .4s;
+            pointer-events: none;
+            z-index: 6
+        }
+
+        .card:hover::before {
+            opacity: 1
+        }
+
+        .card:hover {
+            border-color: rgba(232, 25, 44, 0.3);
+            box-shadow: 0 24px 70px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(232, 25, 44, 0.07), 0 0 50px rgba(232, 25, 44, 0.06)
+        }
+
+        .list .card {
+            display: grid;
+            grid-template-columns: 120px 1fr
+        }
+
+        .list .card:hover {
+            transform: translateY(0) translateX(-5px) !important
+        }
+
+        .list .poster {
+            height: 100%;
+            min-height: 140px
+        }
+
+        .list .card-body {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            padding: 16px 18px
+        }
+
+        .list .card-body h3 {
+            flex: 1;
+            text-align: right;
+            margin: 0;
+            min-height: unset
+        }
+
+        .list .card-desc,
+        .list .card-meta,
+        .list .card-date {
+            display: none
+        }
+
+        .list .btns {
+            flex-shrink: 0
+        }
+
+        /* ═══ الصورة — حواف مستديرة علوية + overflow:hidden ═══ */
+        .poster {
+            height: 380px;
+            overflow: hidden;
+            position: relative;
+            background: var(--surface2);
+            border-radius: var(--radius) var(--radius) 0 0
+        }
+
+        .poster img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .65s ease, filter .4s;
+            display: block
+        }
+
+        .card:hover .poster img {
+            transform: scale(1.1);
+            filter: brightness(0.35)
+        }
+
+        .poster-gradient {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            pointer-events: none;
+            transition: opacity .4s
+        }
+
+        .card:hover .poster-gradient {
+            opacity: .7
+        }
+
+        .num-badge {
+            position: absolute;
+            top: 52px;
+            right: 10px;
+            background: linear-gradient(135deg, #b00, var(--red));
+            color: #fff;
+            font-weight: 900;
+            font-size: .85rem;
+            padding: 4px 13px;
+            border-radius: 8px;
+            z-index: 5;
+            box-shadow: 0 2px 14px rgba(232, 25, 44, 0.55)
+        }
+
+        .new-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: linear-gradient(135deg, var(--gold), #d4a200);
+            color: #000;
+            font-weight: 900;
+            font-size: .6rem;
+            padding: 3px 10px;
+            border-radius: 6px;
+            z-index: 5;
+            letter-spacing: 1px;
+            animation: newPulse 2s ease-in-out infinite
+        }
+
+        @keyframes newPulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 8px rgba(245, 197, 24, 0.4)
+            }
+
+            50% {
+                box-shadow: 0 0 20px rgba(245, 197, 24, 0.75)
+            }
+        }
+
+        .fav-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.4);
+            font-size: .88rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: .3s;
+            z-index: 10
+        }
+
+        .fav-btn:hover {
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.25)
+        }
+
+        .fav-btn.active {
+            color: var(--red);
+            border-color: rgba(232, 25, 44, 0.45);
+            background: rgba(232, 25, 44, 0.18)
+        }
+
+        .fav-btn.active i {
+            animation: heartPop .4s cubic-bezier(.34, 1.4, .64, 1)
+        }
+
+        .watched-btn {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.4);
+            font-size: .82rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: .3s;
+            z-index: 10
+        }
+
+        .watched-btn:hover {
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.25)
+        }
+
+        .watched-btn.active {
+            color: #22c55e;
+            border-color: rgba(34, 197, 94, 0.45);
+            background: rgba(34, 197, 94, 0.18)
+        }
+
+        .watched-filter {
+            padding: 7px 16px;
+            background: var(--surface);
+            border: 1px solid var(--border2);
+            border-radius: 50px;
+            color: var(--muted);
+            font-size: .78rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .2s;
+            font-family: 'Cairo', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap
+        }
+
+        .watched-filter:hover,
+        .watched-filter.active {
+            background: rgba(34, 197, 94, 0.1);
+            border-color: rgba(34, 197, 94, 0.3);
+            color: #22c55e
+        }
+
+        @keyframes heartPop {
+            0% {
+                transform: scale(1)
+            }
+
+            50% {
+                transform: scale(1.4)
+            }
+
+            100% {
+                transform: scale(1)
+            }
+        }
+
+        .share-btn {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.35);
+            font-size: .72rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: .3s;
+            z-index: 10;
+            opacity: 0;
+            transform: scale(.8)
+        }
+
+        .card:hover .share-btn {
+            opacity: 1;
+            transform: scale(1)
+        }
+
+        .share-btn:hover {
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.25)
+        }
+
+        .pills {
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
+            z-index: 5;
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap
+        }
+
+        .pill {
+            padding: 3px 10px;
+            border-radius: 50px;
+            font-size: .67rem;
+            font-weight: 700;
+            letter-spacing: .5px
+        }
+
+        .pill-sub {
+            background: rgba(232, 25, 44, 0.85);
+            color: #fff
+        }
+
+        .pill-dub {
+            background: rgba(26, 111, 170, 0.85);
+            color: #fff
+        }
+
+        .pill-soon {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--muted);
+            border: 1px solid var(--border2)
+        }
+
+        .play-hover {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            z-index: 4;
+            transition: .3s
+        }
+
+        .play-ring {
+            width: 68px;
+            height: 68px;
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: scale(.65);
+            transition: transform .4s cubic-bezier(.34, 1.4, .64, 1);
+            background: rgba(232, 25, 44, 0.18)
+        }
+
+        .play-ring i {
+            font-size: 1.7rem;
+            color: #fff;
+            filter: drop-shadow(0 0 14px rgba(232, 25, 44, 0.9));
+            margin-right: -3px
+        }
+
+        .card:hover .play-hover {
+            opacity: 1
+        }
+
+        .card:hover .play-ring {
+            transform: scale(1)
+        }
+
+        .poster-scanline {
+            position: absolute;
+            inset: 0;
+            z-index: 3;
+            pointer-events: none;
+            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.035) 2px, rgba(0, 0, 0, 0.035) 4px);
+            opacity: 0;
+            transition: opacity .4s
+        }
+
+        .card:hover .poster-scanline {
+            opacity: 1
+        }
+
+        /* ═══ جسم البطاقة — حواف مستديرة سفلية ═══ */
+        .card-body {
+            padding: 16px 20px 20px;
+            text-align: center;
+            border-radius: 0 0 var(--radius) var(--radius);
+            background: var(--surface);
+            position: relative;
+            z-index: 1
+        }
+
+        .card-body h3 {
+            font-size: .92rem;
+            font-weight: 700;
+            min-height: 46px;
+            margin-bottom: 6px;
+            line-height: 1.55;
+            color: var(--text)
+        }
+
+        .card-body h3 mark {
+            background: none;
+            color: var(--red);
+            font-weight: 900;
+            text-decoration: underline;
+            text-decoration-color: rgba(232, 25, 44, 0.4);
+            text-underline-offset: 3px
+        }
+
+        .card-desc {
+            font-size: .73rem;
+            color: var(--muted2);
+            line-height: 1.75;
+            margin-bottom: 8px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden
+        }
+
+        .card-date {
+            font-size: .67rem;
+            color: var(--muted2);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px
+        }
+
+        .card-date i {
+            font-size: .6rem;
+            color: var(--red);
+            opacity: .6
+        }
+
+        .card-meta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            margin-bottom: 14px;
+            font-size: .74rem;
+            color: var(--muted2)
+        }
+
+        .btn-wrap {
+            position: relative;
+            flex: 1;
+            min-width: 0;
+            z-index: 20
+        }
+
+        .btn {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 11px 10px;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Cairo', sans-serif;
+            font-size: .79rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .28s;
+            position: relative;
+            overflow: hidden;
+            -webkit-tap-highlight-color: transparent
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: #fff;
+            opacity: 0;
+            transition: .2s
+        }
+
+        .btn:hover::after {
+            opacity: .07
+        }
+
+        .btn:active {
+            transform: scale(0.97) !important
+        }
+
+        .btn-sub {
+            background: linear-gradient(135deg, #b00, var(--red));
+            color: #fff
+        }
+
+        .btn-sub:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(232, 25, 44, 0.5)
+        }
+
+        .btn-dub {
+            background: linear-gradient(135deg, #0e4a72, var(--blue));
+            color: #fff
+        }
+
+        .btn-dub:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(26, 111, 170, 0.5)
+        }
+
+        .btn:disabled {
+            background: rgba(255, 255, 255, 0.05) !important;
+            color: var(--muted2) !important;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important
+        }
+
+        .btn:disabled::after {
+            display: none
+        }
+
+        .btn .srv-count {
+            font-size: .6rem;
+            opacity: .6;
+            margin-right: 2px
+        }
+
+        .server-drop {
+            position: absolute;
+            bottom: calc(100% + 10px);
+            left: 50%;
+            transform: translateX(-50%) scale(0.92) translateY(8px);
+            background: var(--surface3);
+            border: 1px solid var(--border3);
+            border-radius: 14px;
+            padding: 6px;
+            min-width: 170px;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all .25s cubic-bezier(.34, 1.4, .64, 1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(255, 255, 255, 0.03)
+        }
+
+        .server-drop::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%) rotate(45deg);
+            width: 12px;
+            height: 12px;
+            background: var(--surface3);
+            border-right: 1px solid var(--border3);
+            border-bottom: 1px solid var(--border3)
+        }
+
+        .server-drop.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) scale(1) translateY(0)
+        }
+
+        .srv-opt {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 14px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background .2s;
+            color: var(--text2);
+            font-size: .8rem;
+            font-weight: 600;
+            white-space: nowrap
+        }
+
+        .srv-opt:hover {
+            background: rgba(255, 255, 255, 0.07)
+        }
+
+        .srv-opt .srv-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .7rem;
+            flex-shrink: 0
+        }
+
+        .srv-opt .srv-icon.red {
+            background: rgba(232, 25, 44, 0.15);
+            color: var(--red)
+        }
+
+        .srv-opt .srv-icon.blue {
+            background: rgba(26, 111, 170, 0.15);
+            color: var(--blue-bright)
+        }
+
+        .srv-opt .srv-name {
+            flex: 1;
+            text-align: right
+        }
+
+        .srv-opt .srv-tag {
+            font-size: .58rem;
+            padding: 2px 8px;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--muted);
+            letter-spacing: .5px
+        }
+
+        .btns {
+            display: flex;
+            gap: 8px
+        }
+
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(2, 3, 10, 0.97);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            backdrop-filter: blur(36px);
+            -webkit-backdrop-filter: blur(36px);
+            padding: 20px
+        }
+
+        .overlay::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 60% 45% at 50% 0%, rgba(232, 25, 44, 0.07) 0%, transparent 70%), radial-gradient(ellipse 40% 35% at 50% 100%, rgba(26, 111, 170, 0.04) 0%, transparent 70%);
+            pointer-events: none
+        }
+
+        .overlay.open {
+            display: flex;
+            animation: overlayIn .3s ease
+        }
+
+        @keyframes overlayIn {
+            from {
+                opacity: 0
+            }
+        }
+
+        .player-box {
+            width: 100%;
+            max-width: 1060px;
+            animation: popIn .45s cubic-bezier(.34, 1.4, .64, 1);
+            position: relative;
+            z-index: 1
+        }
+
+        @keyframes popIn {
+            from {
+                transform: scale(.85) translateY(20px);
+                opacity: 0
+            }
+        }
+
+        .player-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            padding: 0 2px;
+            flex-wrap: wrap;
+            gap: 10px
+        }
+
+        .player-header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap
+        }
+
+        .player-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--red), #a00d1a);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .82rem;
+            color: #fff;
+            box-shadow: 0 0 18px rgba(232, 25, 44, 0.55);
+            flex-shrink: 0
+        }
+
+        .player-title {
+            font-size: 1.02rem;
+            font-weight: 800;
+            color: #fff
+        }
+
+        .player-type {
+            padding: 4px 16px;
+            border-radius: 50px;
+            font-size: .7rem;
+            font-weight: 800;
+            letter-spacing: .5px
+        }
+
+        .player-type.sub {
+            background: linear-gradient(135deg, var(--red), #a00d1a);
+            color: #fff;
+            box-shadow: 0 0 14px rgba(232, 25, 44, 0.4)
+        }
+
+        .player-type.dub {
+            background: linear-gradient(135deg, var(--blue), #0e4a72);
+            color: #fff;
+            box-shadow: 0 0 14px rgba(26, 111, 170, 0.4)
+        }
+
+        .player-servers {
+            display: flex;
+            gap: 5px;
+            margin-right: 4px
+        }
+
+        .ps-btn {
+            padding: 4px 14px;
+            border-radius: 8px;
+            font-size: .68rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .25s;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--muted);
+            font-family: 'Cairo', sans-serif;
+            white-space: nowrap;
+            -webkit-tap-highlight-color: transparent
+        }
+
+        .ps-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text)
+        }
+
+        .ps-btn.active {
+            background: rgba(232, 25, 44, 0.15);
+            border-color: rgba(232, 25, 44, 0.4);
+            color: var(--red)
+        }
+
+        .ps-btn.dub-active {
+            background: rgba(26, 111, 170, 0.15);
+            border-color: rgba(26, 111, 170, 0.4);
+            color: var(--blue-bright)
+        }
+
+        .close-btn {
+            width: 42px;
+            height: 42px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: rgba(255, 255, 255, 0.55);
+            font-size: .95rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: .28s;
+            flex-shrink: 0
+        }
+
+        .close-btn:hover {
+            background: var(--red);
+            border-color: var(--red);
+            color: #fff;
+            transform: rotate(90deg);
+            box-shadow: 0 0 22px rgba(232, 25, 44, 0.5)
+        }
+
+        .player-frame-wrap {
+            position: relative;
+            border-radius: 18px;
+            padding: 2px;
+            background: linear-gradient(135deg, rgba(232, 25, 44, 0.3) 0%, rgba(255, 255, 255, 0.04) 40%, rgba(26, 111, 170, 0.2) 100%);
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04), 0 0 70px rgba(232, 25, 44, 0.15), 0 60px 120px rgba(0, 0, 0, 0.98)
+        }
+
+        .player-frame {
+            position: relative;
+            padding-bottom: 56.25%;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #000
+        }
+
+        .player-frame iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none
+        }
+
+        .player-loading {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 5;
+            transition: opacity .4s
+        }
+
+        .player-loading.hide {
+            opacity: 0;
+            pointer-events: none
+        }
+
+        .loader-ring {
+            width: 46px;
+            height: 46px;
+            border: 3px solid rgba(255, 255, 255, 0.08);
+            border-top-color: var(--red);
+            border-radius: 50%;
+            animation: loaderSpin .8s linear infinite
+        }
+
+        @keyframes loaderSpin {
+            to {
+                transform: rotate(360deg)
+            }
+        }
+
+        .player-loading span {
+            color: var(--muted);
+            font-size: .78rem
+        }
+
+        .player-nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            margin-top: 18px
+        }
+
+        .pn-btn {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 9px 22px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 50px;
+            color: rgba(255, 255, 255, 0.5);
+            font-family: 'Cairo', sans-serif;
+            font-size: .79rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .25s;
+            -webkit-tap-highlight-color: transparent
+        }
+
+        .pn-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.18)
+        }
+
+        .pn-btn:disabled {
+            opacity: .25;
+            cursor: not-allowed
+        }
+
+        .pn-info {
+            color: var(--muted);
+            font-size: .75rem;
+            min-width: 70px;
+            text-align: center
+        }
+
+        .pn-keys {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            margin-top: 10px;
+            color: var(--muted2);
+            font-size: .68rem
+        }
+
+        .pn-keys kbd {
+            padding: 2px 9px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            font-family: 'Cairo', sans-serif;
+            font-size: .65rem;
+            color: var(--muted)
+        }
+
+        .shortcuts-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(2, 3, 10, 0.92);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 99998;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 20px
+        }
+
+        .shortcuts-modal.open {
+            display: flex;
+            animation: overlayIn .2s ease
+        }
+
+        .shortcuts-box {
+            background: var(--surface2);
+            border: 1px solid var(--border3);
+            border-radius: 20px;
+            padding: 36px 32px;
+            max-width: 440px;
+            width: 100%;
+            animation: popIn .35s cubic-bezier(.34, 1.4, .64, 1);
+            position: relative
+        }
+
+        .shortcuts-box h3 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-align: center;
+            color: var(--text)
+        }
+
+        .shortcuts-box h3 i {
+            color: var(--red);
+            margin-left: 8px
+        }
+
+        .shortcut-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border)
+        }
+
+        .shortcut-row:last-child {
+            border-bottom: none
+        }
+
+        .shortcut-row span {
+            color: var(--text2);
+            font-size: .82rem
+        }
+
+        .shortcut-row kbd {
+            padding: 4px 12px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border2);
+            border-radius: 7px;
+            font-family: 'Cairo', sans-serif;
+            font-size: .75rem;
+            color: var(--muted);
+            min-width: 36px;
+            text-align: center
+        }
+
+        .shortcuts-close {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border2);
+            border-radius: 50%;
+            color: var(--muted);
+            font-size: .8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: .25s
+        }
+
+        .shortcuts-close:hover {
+            background: var(--red);
+            color: #fff;
+            border-color: var(--red)
+        }
+
+        #toastBox {
+            position: fixed;
+            top: 78px;
+            left: 20px;
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            pointer-events: none
+        }
+
+        .toast {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 13px 22px;
+            background: rgba(10, 13, 30, 0.97);
+            border: 1px solid var(--border2);
+            border-radius: var(--radius-sm);
+            color: var(--text);
+            font-size: .83rem;
+            font-weight: 600;
+            box-shadow: 0 12px 50px rgba(0, 0, 0, 0.6);
+            animation: toastIn .38s cubic-bezier(.34, 1.4, .64, 1);
+            pointer-events: auto;
+            min-width: 230px
+        }
+
+        .toast.out {
+            animation: toastOut .3s ease forwards
+        }
+
+        .toast i {
+            font-size: 1rem;
+            flex-shrink: 0
+        }
+
+        .toast-success i {
+            color: #22c55e
+        }
+
+        .toast-info i {
+            color: var(--blue-bright)
+        }
+
+        .toast-warn i {
+            color: var(--gold)
+        }
+
+        .toast-error i {
+            color: var(--red)
+        }
+
+        @keyframes toastIn {
+            from {
+                transform: translateX(-44px);
+                opacity: 0
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1
+            }
+        }
+
+        @keyframes toastOut {
+            to {
+                transform: translateX(-44px);
+                opacity: 0
+            }
+        }
+
+        .empty {
+            grid-column: 1/-1;
+            padding: 90px 20px;
+            text-align: center;
+            color: var(--muted)
+        }
+
+        .empty-icon {
+            font-size: 4rem;
+            opacity: .12;
+            margin-bottom: 16px;
+            animation: emptyFloat 3s ease-in-out infinite
+        }
+
+        @keyframes emptyFloat {
+
+            0%,
+            100% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(-10px)
+            }
+        }
+
+        .empty p {
+            font-size: .9rem;
+            margin-bottom: 6px
+        }
+
+        .empty small {
+            font-size: .75rem;
+            color: var(--muted2)
+        }
+
+        #scrollTop {
+            position: fixed;
+            bottom: 24px;
+            left: 24px;
+            width: 44px;
+            height: 44px;
+            background: var(--surface2);
+            border: 1px solid var(--border2);
+            border-radius: 11px;
+            color: var(--red);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 500;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: .3s;
+            font-size: .85rem
+        }
+
+        #scrollTop.show {
+            opacity: 1;
+            transform: translateY(0)
+        }
+
+        #scrollTop:hover {
+            background: var(--red);
+            color: #fff;
+            border-color: var(--red);
+            box-shadow: 0 0 18px rgba(232, 25, 44, 0.5)
+        }
+
+        footer {
+            position: relative;
+            z-index: 2;
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            color: var(--muted2);
+            font-size: .82rem
+        }
+
+        footer a {
+            color: var(--red);
+            text-decoration: none
+        }
+
+        footer a:hover {
+            text-decoration: underline
+        }
+
+        .footer-line {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 7px;
+            flex-wrap: wrap
+        }
+
+        .footer-line .dot {
+            width: 3px;
+            height: 3px;
+            background: var(--red);
+            border-radius: 50%;
+            box-shadow: 0 0 7px var(--red-glow)
+        }
+
+        .footer-stats {
+            display: flex;
+            justify-content: center;
+            gap: 22px;
+            margin-top: 10px;
+            font-size: .73rem;
+            color: var(--muted2);
+            flex-wrap: wrap
+        }
+
+        .footer-stats span i {
+            color: var(--red);
+            margin-left: 4px
+        }
+
+        .btn-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            padding: 13px 28px;
+            background: var(--gold);
+            color: #000;
+            text-decoration: none;
+            border-radius: var(--radius-sm);
+            font-weight: 900;
+            font-size: .88rem;
+            transition: .3s;
+            box-shadow: 0 6px 24px rgba(245, 197, 24, 0.3)
+        }
+
+        .btn-home:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 36px rgba(245, 197, 24, 0.45);
+            background: #ffd740
+        }
+
+        /* ════════════════════════════════════════
+           تحسينات الموبايل
+        ════════════════════════════════════════ */
+        @media(max-width:900px) {
+            .nav-links {
+                display: none
+            }
+
+            .hamburger {
+                display: flex
+            }
+        }
+
+        @media(max-width:700px) {
+            .nav {
+                flex-wrap: wrap;
+                height: auto;
+                padding: 10px 4%;
+                gap: 8px;
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px)
+            }
+
+            .search-wrap {
+                order: 3;
+                width: 100%;
+                max-width: 100%
+            }
+
+            .hamburger {
+                order: 2
+            }
+
+            .hero {
+                padding: 90px 4% 70px
+            }
+
+            .stat {
+                padding: 12px 20px
+            }
+
+            .stat-num {
+                font-size: 1.6rem
+            }
+
+            .cd-num {
+                font-size: 2rem
+            }
+
+            .cd-unit {
+                padding: 14px 16px 10px;
+                min-width: 70px
+            }
+
+            .cd-sep {
+                display: none
+            }
+
+            .countdown-section {
+                padding: 0 14px
+            }
+
+            .countdown-card {
+                padding: 28px 20px;
+                box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5)
+            }
+
+            .chips {
+                display: none
+            }
+
+            .shortcut-hint {
+                display: none
+            }
+
+            .filter-bar {
+                padding: 0 14px;
+                gap: 8px
+            }
+
+            .controls {
+                gap: 6px
+            }
+
+            .fav-filter,
+            .dub-filter,
+            .watched-filter {
+                padding: 7px 12px;
+                font-size: .72rem
+            }
+
+            .fav-filter span,
+            .dub-filter span,
+            .watched-filter span {
+                display: none
+            }
+
+            .divider-v {
+                display: none
+            }
+
+            .result-info {
+                font-size: .78rem
+            }
+
+            .ambient {
+                display: none
+            }
+
+            .hero h1 .accent::after {
+                animation: none;
+                display: none
+            }
+
+            .card:hover {
+                box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6)
+            }
+
+            .card {
+                overflow: visible
+            }
+
+            .card:hover .poster img {
+                transform: scale(1.04);
+                filter: brightness(0.45)
+            }
+
+            .poster-scanline {
+                display: none
+            }
+
+            .play-hover {
+                display: none !important
+            }
+
+            .card::before {
+                display: none
+            }
+
+            .grid {
+                grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+                gap: 14px;
+                padding: 0 12px;
+                content-visibility: visible;
+                contain-intrinsic-size: none
+            }
+
+            .poster {
+                height: 230px
+            }
+
+            .card-body {
+                padding: 10px 10px 14px;
+                overflow: visible
+            }
+
+            .card-body h3 {
+                font-size: .76rem;
+                min-height: 36px;
+                margin-bottom: 4px
+            }
+
+            .card-desc,
+            .card-date,
+            .card-meta {
+                display: none
+            }
+
+            .num-badge {
+                top: 44px;
+                right: 8px;
+                font-size: .72rem;
+                padding: 3px 9px;
+                border-radius: 6px
+            }
+
+            .new-badge {
+                top: 8px;
+                left: 8px;
+                font-size: .55rem;
+                padding: 2px 8px
+            }
+
+            .fav-btn {
+                width: 38px;
+                height: 38px;
+                top: 8px;
+                right: 8px;
+                font-size: .85rem;
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none
+            }
+
+            .watched-btn {
+                width: 34px;
+                height: 34px;
+                top: 8px;
+                left: 8px;
+                font-size: .8rem;
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none
+            }
+
+            .share-btn {
+                width: 34px;
+                height: 34px;
+                bottom: 10px;
+                right: 10px;
+                opacity: 1;
+                transform: scale(1);
+                font-size: .75rem;
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none
+            }
+
+            .pills {
+                bottom: 8px;
+                left: 8px
+            }
+
+            .pill {
+                font-size: .58rem;
+                padding: 2px 7px
+            }
+
+            .btns {
+                flex-direction: column;
+                gap: 8px;
+                width: 100%
+            }
+
+            .btn {
+                padding: 13px 10px;
+                font-size: .82rem;
+                border-radius: 12px;
+                min-height: 46px;
+                font-weight: 800;
+                letter-spacing: .3px
+            }
+
+            .btn i {
+                font-size: .9rem
+            }
+
+            .btn .srv-count {
+                font-size: .62rem
+            }
+
+            .btn-wrap {
+                flex: unset;
+                width: 100%
+            }
+
+            /* ═══ القائمة المنسدلة للموبايل — تفتح للأسفل ═══ */
+            .server-drop {
+                bottom: auto !important;
+                top: calc(100% + 8px) !important;
+                left: 50% !important;
+                transform: translateX(-50%) scale(0.92) translateY(-8px) !important;
+                min-width: 200px !important;
+                width: calc(100% + 20px) !important;
+                max-width: 90vw !important;
+                box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7)
+            }
+
+            .server-drop.open {
+                transform: translateX(-50%) scale(1) translateY(0) !important
+            }
+
+            .server-drop::after {
+                top: -6px !important;
+                bottom: auto !important;
+                transform: translateX(-50%) rotate(225deg) !important
+            }
+
+            .srv-opt {
+                padding: 14px 16px;
+                font-size: .85rem;
+                gap: 12px
+            }
+
+            .srv-opt .srv-icon {
+                width: 34px;
+                height: 34px;
+                font-size: .8rem
+            }
+
+            .list .card {
+                grid-template-columns: 90px 1fr
+            }
+
+            .list .poster {
+                min-height: 110px;
+                height: auto
+            }
+
+            .list .card-body {
+                padding: 10px 12px;
+                gap: 8px
+            }
+
+            .list .btns {
+                flex-direction: row;
+                gap: 6px
+            }
+
+            .list .btn {
+                padding: 9px 6px;
+                font-size: .7rem;
+                min-height: 38px;
+                border-radius: 9px
+            }
+
+            .list .btn i {
+                font-size: .75rem
+            }
+
+            .list .btn .srv-count {
+                display: none
+            }
+
+            /* وضع القائمة — حواف مختلفة */
+            .list .poster {
+                border-radius: var(--radius) 0 0 var(--radius)
+            }
+
+            .list .card-body {
+                border-radius: 0 var(--radius) var(--radius) 0
+            }
+
+            .player-header {
+                gap: 8px;
+                margin-bottom: 12px
+            }
+
+            .player-icon {
+                width: 32px;
+                height: 32px;
+                font-size: .75rem;
+                border-radius: 8px
+            }
+
+            .player-title {
+                font-size: .82rem
+            }
+
+            .player-type {
+                font-size: .6rem;
+                padding: 3px 12px
+            }
+
+            .player-servers {
+                gap: 3px;
+                flex-wrap: wrap
+            }
+
+            .ps-btn {
+                font-size: .6rem;
+                padding: 4px 10px;
+                min-height: 30px
+            }
+
+            .close-btn {
+                width: 38px;
+                height: 38px;
+                font-size: .85rem
+            }
+
+            .player-nav {
+                gap: 10px;
+                margin-top: 14px;
+                flex-wrap: wrap
+            }
+
+            .pn-btn {
+                padding: 10px 16px;
+                font-size: .72rem;
+                min-height: 40px
+            }
+
+            .pn-info {
+                font-size: .7rem;
+                min-width: 60px
+            }
+
+            .pn-keys {
+                display: none
+            }
+
+            .player-frame-wrap {
+                border-radius: 14px;
+                padding: 2px;
+                box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04), 0 0 30px rgba(232, 25, 44, 0.1), 0 30px 60px rgba(0, 0, 0, 0.7)
+            }
+
+            .player-frame {
+                border-radius: 12px
+            }
+
+            .overlay {
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px)
+            }
+
+            .mobile-drawer {
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px)
+            }
+        }
+
+        @media(max-width:500px) {
+            #particles {
+                display: none !important
+            }
+
+            .grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 10px;
+                padding: 0 8px;
+                content-visibility: visible;
+                contain-intrinsic-size: none
+            }
+
+            .poster {
+                height: 200px
+            }
+
+            .card-body {
+                padding: 8px 8px 12px
+            }
+
+            .card-body h3 {
+                font-size: .72rem;
+                min-height: 32px
+            }
+
+            .btn {
+                padding: 11px 8px;
+                font-size: .78rem;
+                min-height: 42px
+            }
+
+            .num-badge {
+                font-size: .65rem;
+                padding: 2px 7px
+            }
+
+            .fav-btn,
+            .share-btn {
+                width: 34px;
+                height: 34px
+            }
+        }
+
+        @media(prefers-reduced-motion:reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="scrollProgress"></div>
+
+    <div id="intro">
+        <div class="intro-logo">GG</div>
+        <div class="intro-text">جاري التحميل</div>
+        <div class="intro-bar">
+            <div class="intro-fill"></div>
+        </div>
+    </div>
+
+    <canvas id="particles"></canvas>
+    <div class="ambient"></div>
+
+    <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+    <div class="mobile-drawer" id="mobileDrawer">
+        <div class="drawer-close" onclick="closeDrawer()"><i class="fas fa-xmark"></i></div>
+        <a href="conan-3.html" class="drawer-link active"><i class="fas fa-fire"></i> الحلقات الجديدة</a>
+        <a href="conan-d.html" class="drawer-link"><i class="fas fa-play"></i>الحلقات المدبلجة</a>
+        <a href="conan-2.html" class="drawer-link"><i class="fas fa-globe"></i> عالم كونان</a>
+        <a href="index.html" class="drawer-link"><i class="fas fa-film"></i> الأفلام</a>
+        <a href="conan.html" class="drawer-link"><i class="fas fa-play"></i> جميع الحلقات</a>
+        <a href="https://gg-gaming-401.netlify.app/" class="drawer-link"><i class="fas fa-house"></i> الرئيسية</a>
+        <div class="drawer-divider"></div>
+        <button class="drawer-link" onclick="toggleTheme()"><i class="fas fa-adjust"></i> <span
+                id="drawerThemeText">الوضع الليلي</span></button>
+        <div class="drawer-shortcuts">
+            <kbd>ESC</kbd> إغلاق المشغل &nbsp; <kbd>←</kbd> <kbd>→</kbd> تنقل &nbsp; <kbd>1</kbd> <kbd>2</kbd> تبديل
+            السيرفر
+        </div>
+    </div>
+
+    <nav class="nav">
+        <a href="https://gg-gaming-401.netlify.app/" class="logo">
+            <div class="logo-icon">GG</div>
+            <span class="logo-text">GG <span>GAMING</span></span>
+        </a>
+        <div class="search-wrap">
+            <i class="fas fa-magnifying-glass"></i>
+            <input type="text" id="searchInput" placeholder="ابحث برقم الحلقة أو اسمها..." oninput="debounceSearch()">
+        </div>
+        <div class="nav-links">
+            <a href="conan-3.html" class="nav-link active-page"><i class="fas fa-fire"></i><span> الحلقات
+                    الجديدة</span></a>
+            <a href="conan-d.html" class="nav-link"><i class="fas fa-play"></i><span>الحلقات المدبلجة</span></a>
+            <a href="index.html" class="nav-link"><i class="fas fa-film"></i><span>الأفلام</span></a>
+            <a href="conan-2.html" class="nav-link"><i class="fas fa-globe"></i> عالم كونان</a>
+            <a href="conan.html" class="nav-link"><i class="fas fa-play"></i><span>الحلقات</span></a>
+            <a href="https://gg-gaming-401.netlify.app/" class="nav-link"><i
+                    class="fas fa-house"></i><span>الرئيسية</span></a>
+            <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
+        </div>
+        <button class="hamburger" id="hamburgerBtn" onclick="openDrawer()"><i class="fas fa-bars"></i></button>
+        <div class="nav-line"></div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-inner">
+            <div class="hero-tag"><i class="fas fa-satellite-dish"></i> تزامن مع اليابان</div>
+            <h1>حلقات <span class="accent">كونان الجديدة</span></h1>
+            <p class="hero-sub">أحدث حلقات المحقق كونان — تصميم سينمائي فريد</p>
+            <div class="stats-row">
+                <div class="stat"><span class="stat-num" id="totalEp">0</span><span class="stat-label">حلقة</span></div>
+                <div class="stat"><span class="stat-num red" id="availEp">0</span><span class="stat-label">متاحة</span>
+                </div>
+                <div class="stat"><span class="stat-num">HD</span><span class="stat-label">جودة</span></div>
+            </div>
+            <div class="progress-wrap">
+                <div class="progress-info"><span>التوفر</span><span id="progressPercent">0%</span></div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width:0%"></div>
+                </div>
+            </div>
+            <div class="hero-btns"
+                style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:20px;position:relative;z-index:10">
+                <a href="conan-d.html" class="btn-home"><i class="fas fa-play-circle"></i> حلقات مدبلجة</a>
+                <button onclick="openRandom()" class="btn-home"
+                    style="background:var(--blue);color:#fff;box-shadow:0 6px 24px rgba(26,111,170,0.3);cursor:pointer;border:none"><i
+                        class="fas fa-shuffle"></i> حلقة عشوائية</button>
+                <button id="continueBtn" onclick="continueWatching()" class="btn-home"
+                    style="display:none;background:var(--red);color:#fff;box-shadow:0 6px 24px rgba(232,25,44,0.3);cursor:pointer;border:none"><i
+                        class="fas fa-forward-step"></i> متابعة المشاهدة</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="countdown-section" id="countdownSection">
+        <div class="countdown-card">
+            <div class="cd-top">
+                <span class="cd-dot"></span>
+                <span class="cd-label">الحلقة القادمة</span>
+            </div>
+            <div class="cd-episode-name" id="cdEpName">الحلقة <span>1206</span> — المحقق كونان</div>
+            <div class="cd-subtitle">تُبث كل يوم سبت الساعة 6:00 مساءً بتوقيت اليابان</div>
+            <div class="cd-timer" id="cdTimer">
+                <div class="cd-unit"><span class="cd-num" id="cdDays">00</span><span class="cd-unit-label">يوم</span>
+                </div>
+                <span class="cd-sep">:</span>
+                <div class="cd-unit"><span class="cd-num" id="cdHours">00</span><span class="cd-unit-label">ساعة</span>
+                </div>
+                <span class="cd-sep">:</span>
+                <div class="cd-unit"><span class="cd-num" id="cdMins">00</span><span class="cd-unit-label">دقيقة</span>
+                </div>
+                <span class="cd-sep">:</span>
+                <div class="cd-unit"><span class="cd-num" id="cdSecs">00</span><span class="cd-unit-label">ثانية</span>
+                </div>
+            </div>
+            <div class="cd-done" id="cdDone">
+                <i class="fas fa-circle-check"></i>
+                <p>الحلقة متاحة الآن!</p>
+                <small>تحقق من قائمة الحلقات أدناه</small>
+            </div>
+            <div class="cd-meta">
+                <div class="cd-meta-item"><i class="fas fa-calendar"></i><span id="cdDateStr">—</span></div>
+                <div class="cd-meta-item"><i class="fas fa-clock"></i><span>6:00 م — JST</span></div>
+                <div class="cd-meta-item"><i class="fas fa-tv"></i><span>قناة NTV</span></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="filter-bar">
+        <p class="result-info">عرض <strong id="visibleCount">0</strong> حلقة</p>
+        <div class="controls">
+            <div class="chips">
+                <div class="chip active" onclick="setFilter('all',this)">الكل</div>
+                <div class="chip" onclick="setFilter('sub',this)">مترجم</div>
+                <div class="chip" onclick="setFilter('dub',this)">مدبلج</div>
+                <div class="chip" onclick="setFilter('soon',this)">قريباً</div>
+            </div>
+            <div class="divider-v"></div>
+            <div class="fav-filter" id="favFilterBtn" onclick="toggleFavFilter()"><i
+                    class="fas fa-heart"></i><span>المفضلة</span></div>
+            <div class="dub-filter" id="dubFilterBtn" onclick="toggleDubFilter()"><i
+                    class="fas fa-microphone-lines"></i><span>مدبلج فقط</span></div>
+            <div class="watched-filter" id="watchedFilterBtn" onclick="toggleWatchedFilter()"><i
+                    class="fas fa-eye"></i><span>المشاهدة</span></div>
+            <div class="divider-v"></div>
+            <div class="view-btns">
+                <div class="vbtn active" id="vGrid" onclick="setView('grid')" title="شبكة"><i class="fas fa-grip"></i>
+                </div>
+                <div class="vbtn" id="vList" onclick="setView('list')" title="قائمة"><i class="fas fa-list"></i></div>
+            </div>
+            <div class="shortcut-hint" onclick="toggleShortcutsModal()"><kbd>?</kbd> اختصارات</div>
+        </div>
+    </div>
+
+    <div class="grid" id="container"></div>
+
+    <div class="shortcuts-modal" id="shortcutsModal" onclick="if(event.target===this)toggleShortcutsModal()">
+        <div class="shortcuts-box">
+            <div class="shortcuts-close" onclick="toggleShortcutsModal()"><i class="fas fa-xmark"></i></div>
+            <h3><i class="fas fa-keyboard"></i>اختصارات لوحة المفاتيح</h3>
+            <div class="shortcut-row"><span>إغلاق المشغل</span><kbd>ESC</kbd></div>
+            <div class="shortcut-row"><span>الحلقة السابقة</span><kbd>→</kbd></div>
+            <div class="shortcut-row"><span>الحلقة التالية</span><kbd>←</kbd></div>
+            <div class="shortcut-row"><span>السيرفر الأول</span><kbd>1</kbd></div>
+            <div class="shortcut-row"><span>السيرفر الثاني</span><kbd>2</kbd></div>
+            <div class="shortcut-row"><span>اختصارات لوحة المفاتيح</span><kbd>?</kbd></div>
+            <div class="shortcut-row"><span>البحث السريع</span><kbd>/</kbd></div>
+            <div class="shortcut-row"><span>العودة للأعلى</span><kbd>Home</kbd></div>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay" onclick="overlayClick(event)">
+        <div class="player-box">
+            <div class="player-header">
+                <div class="player-header-left">
+                    <div class="player-icon"><i class="fas fa-play"></i></div>
+                    <span class="player-title" id="pTitle">—</span>
+                    <span class="player-type sub" id="pType">مترجم</span>
+                    <div class="player-servers" id="pServers"></div>
+                    <label class="pn-btn"
+                        style="cursor:pointer;margin-right:auto;gap:5px;font-size:.75rem;padding:7px 16px;border-radius:50px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);color:rgba(255,255,255,0.45);"><input
+                            type="checkbox" id="autoplayToggle"
+                            style="margin-left:5px;width:14px;height:14px;vertical-align:middle;cursor:pointer;"> تشغيل
+                        تلقائي</label>
+                </div>
+                <div class="close-btn" onclick="closePlayer()"><i class="fas fa-xmark"></i></div>
+            </div>
+            <div class="player-frame-wrap">
+                <div class="player-frame">
+                    <iframe id="player" src="about:blank" allowfullscreen allow="autoplay; fullscreen"></iframe>
+                    <div class="player-loading" id="pLoading">
+                        <div class="loader-ring"></div>
+                        <span>جاري التحميل...</span>
+                    </div>
+                </div>
+            </div>
+            <div class="player-nav">
+                <div class="pn-btn" id="pnPrev" onclick="navigateEp(-1)"><i class="fas fa-chevron-right"></i> السابق
+                </div>
+                <span class="pn-info" id="pNavInfo">1 / 10</span>
+                <div class="pn-btn" id="pnNext" onclick="navigateEp(1)">التالي <i class="fas fa-chevron-left"></i></div>
+            </div>
+            <div class="pn-keys">
+                <span><kbd>ESC</kbd> إغلاق</span>
+                <span><kbd>←</kbd> السابق</span>
+                <span><kbd>→</kbd> التالي</span>
+                <span><kbd>1</kbd> <kbd>2</kbd> سيرفر</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="toastBox"></div>
+    <div id="scrollTop" onclick="scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-arrow-up"></i></div>
+
+    <footer>
+        <div class="footer-line">
+            <span>تصميم المبرمج</span>
+            <span class="dot"></span>
+            <a href="#">جسار الربيع</a>
+            <span class="dot"></span>
+            <span>GG Gaming &copy; 2026</span>
+        </div>
+        <div class="footer-stats" id="footerStats">
+            <span><i class="fas fa-eye"></i> تمت المشاهدة: <strong id="eWatchCount">0</strong> مرة</span>
+            <span><i class="fas fa-heart"></i> المفضلة: <strong id="eFavCount">0</strong> حلقة</span>
+            <span><i class="fas fa-server"></i> السيرفرات: <strong id="eSrvCount">0</strong></span>
+        </div>
+        <p style="margin-top:10px;opacity:.45">جميع الحقوق محفوظة — ليست للأغراض التجارية</p>
+    </footer>
+
+    <script>
+        const IS_MOBILE = window.innerWidth <= 700;
+        const IS_SMALL = window.innerWidth <= 500;
+        const REDUCE_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const SKIP_PARTICLES = IS_SMALL || REDUCE_MOTION;
+        const SKIP_TILT = IS_MOBILE || REDUCE_MOTION;
+
+        function throttle(fn, ms) {
+            let last = 0, tid = null;
+            return function (...a) {
+                const now = Date.now();
+                if (now - last >= ms) { last = now; fn.apply(this, a); }
+                else if (!tid) { tid = setTimeout(() => { last = Date.now(); tid = null; fn.apply(this, a); }, ms - (now - last)); }
+            };
+        }
+
+        let _searchTimer = null;
+        function debounceSearch() { clearTimeout(_searchTimer); _searchTimer = setTimeout(filterEpisodes, 180); }
+
+        let pageVisible = true;
+        document.addEventListener('visibilitychange', () => { pageVisible = !document.hidden; });
+
+        const EPISODES = [983, 1159, 1160, 1161, 1162, 1163, 1164, 1165, 1166, 1167, 1168, 1169, 1170, 1171, 1172, 1173, 1174, 1175, 1176, 1177, 1178, 1179, 1180, 1181, 1182, 1183, 1184, 1185, 1186, 1187, 1188, 1189, 1190, 1191, 1192, 1193, 1194, 1195, 1196, 1197, 1198, 1199, 1200, 1201, 1202, 1202.5, 1203, 1204, 1205];
+        const EP_COLORS = [
+            { from: 'rgba(200,20,30,0.5)', to: 'rgba(40,10,50,0.45)' }, { from: 'rgba(20,50,140,0.5)', to: 'rgba(10,20,60,0.45)' },
+            { from: 'rgba(140,25,70,0.5)', to: 'rgba(30,10,50,0.45)' }, { from: 'rgba(170,70,15,0.5)', to: 'rgba(40,15,10,0.45)' },
+            { from: 'rgba(15,110,70,0.5)', to: 'rgba(10,40,30,0.45)' }, { from: 'rgba(90,20,140,0.5)', to: 'rgba(30,10,60,0.45)' },
+            { from: 'rgba(180,140,15,0.5)', to: 'rgba(50,30,10,0.45)' }, { from: 'rgba(15,90,140,0.5)', to: 'rgba(10,30,50,0.45)' },
+            { from: 'rgba(170,15,55,0.5)', to: 'rgba(50,10,30,0.45)' }, { from: 'rgba(55,55,75,0.5)', to: 'rgba(20,20,30,0.45)' },
+            { from: 'rgba(200,20,30,0.5)', to: 'rgba(40,10,50,0.45)' }, { from: 'rgba(20,50,140,0.5)', to: 'rgba(10,20,60,0.45)' },
+            { from: 'rgba(140,25,70,0.5)', to: 'rgba(30,10,50,0.45)' }, { from: 'rgba(170,70,15,0.5)', to: 'rgba(40,15,10,0.45)' },
+            { from: 'rgba(15,110,70,0.5)', to: 'rgba(10,40,30,0.45)' }, { from: 'rgba(90,20,140,0.5)', to: 'rgba(30,10,60,0.45)' },
+            { from: 'rgba(180,140,15,0.5)', to: 'rgba(50,30,10,0.45)' }, { from: 'rgba(15,90,140,0.5)', to: 'rgba(10,30,50,0.45)' },
+            { from: 'rgba(170,15,55,0.5)', to: 'rgba(50,10,30,0.45)' }, { from: 'rgba(55,55,75,0.5)', to: 'rgba(20,20,30,0.45)' },
+            { from: 'rgba(200,20,30,0.5)', to: 'rgba(40,10,50,0.45)' }, { from: 'rgba(20,50,140,0.5)', to: 'rgba(10,20,60,0.45)' },
+            { from: 'rgba(140,25,70,0.5)', to: 'rgba(30,10,50,0.45)' }, { from: 'rgba(170,70,15,0.5)', to: 'rgba(40,15,10,0.45)' },
+            { from: 'rgba(15,110,70,0.5)', to: 'rgba(10,40,30,0.45)' }, { from: 'rgba(90,20,140,0.5)', to: 'rgba(30,10,60,0.45)' },
+            { from: 'rgba(180,140,15,0.5)', to: 'rgba(50,30,10,0.45)' }, { from: 'rgba(15,90,140,0.5)', to: 'rgba(10,30,50,0.45)' },
+            { from: 'rgba(170,15,55,0.5)', to: 'rgba(50,10,30,0.45)' }, { from: 'rgba(55,55,75,0.5)', to: 'rgba(20,20,30,0.45)' },
+            { from: 'rgba(200,20,30,0.5)', to: 'rgba(40,10,50,0.45)' }, { from: 'rgba(20,50,140,0.5)', to: 'rgba(10,20,60,0.45)' },
+            { from: 'rgba(140,25,70,0.5)', to: 'rgba(30,10,50,0.45)' }, { from: 'rgba(170,70,15,0.5)', to: 'rgba(40,15,10,0.45)' },
+            { from: 'rgba(15,110,70,0.5)', to: 'rgba(10,40,30,0.45)' }, { from: 'rgba(90,20,140,0.5)', to: 'rgba(30,10,60,0.45)' },
+            { from: 'rgba(180,140,15,0.5)', to: 'rgba(50,30,10,0.45)' }, { from: 'rgba(15,90,140,0.5)', to: 'rgba(10,30,50,0.45)' },
+            { from: 'rgba(170,15,55,0.5)', to: 'rgba(50,10,30,0.45)' }, { from: 'rgba(55,55,75,0.5)', to: 'rgba(20,20,30,0.45)' },
+            { from: 'rgba(200,20,30,0.5)', to: 'rgba(40,10,50,0.45)' }, { from: 'rgba(20,50,140,0.5)', to: 'rgba(10,20,60,0.45)' },
+            { from: 'rgba(140,25,70,0.5)', to: 'rgba(30,10,50,0.45)' }, { from: 'rgba(170,70,15,0.5)', to: 'rgba(40,15,10,0.45)' },
+            { from: 'rgba(15,110,70,0.5)', to: 'rgba(10,40,30,0.45)' }, { from: 'rgba(90,20,140,0.5)', to: 'rgba(30,10,60,0.45)' },
+            { from: 'rgba(180,140,15,0.5)', to: 'rgba(50,30,10,0.45)' }, { from: 'rgba(15,90,140,0.5)', to: 'rgba(10,30,50,0.45)' },
+            { from: 'rgba(170,15,55,0.5)', to: 'rgba(50,10,30,0.45)' }, { from: 'rgba(55,55,75,0.5)', to: 'rgba(20,20,30,0.45)' },
+            { from: 'rgba(200,20,30,0.5)', to: 'rgba(40,10,50,0.45)' }, { from: 'rgba(20,50,140,0.5)', to: 'rgba(10,20,60,0.45)' },
+            { from: 'rgba(140,25,70,0.5)', to: 'rgba(30,10,50,0.45)' }, { from: 'rgba(170,70,15,0.5)', to: 'rgba(40,15,10,0.45)' },
+            { from: 'rgba(15,110,70,0.5)', to: 'rgba(10,40,30,0.45)' }, { from: 'rgba(90,20,140,0.5)', to: 'rgba(30,10,60,0.45)' },
+            { from: 'rgba(180,140,15,0.5)', to: 'rgba(50,30,10,0.45)' }, { from: 'rgba(15,90,140,0.5)', to: 'rgba(10,30,50,0.45)' },
+            { from: 'rgba(170,15,55,0.5)', to: 'rgba(50,10,30,0.45)' }, { from: 'rgba(55,55,75,0.5)', to: 'rgba(20,20,30,0.45)' },
+        ];
+        const EP_DATES = [
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '2026-4-4', '2026-4-11', '2026-4-18', '2026-4-25', '2026-5-2', '2026-5-9', '2026-5-30','2026-6-6','2026-6-13','2026-6-20','2026-6-27'];
+        const TITLES = [
+            'الحلقة 983 — إعادة انتاج للحلقة 983: كايتو كيد في مواجهة كومي',
+
+            'الحلقة 1159 — مقصد الوداع', 
+            'الحلقة 1160 — عندما يتردد صوت الخيزران', 
+            'الحلقة 1161 — مهمة توغو الخاصة', 
+            'الحلقة 1162 — فلم إيومي الوثائقي', 
+            'الحلقة 1163 — العملة الثمينة', 
+            'الحلقة 1164 — ذكريات قبل سبع عشرة سنة الحصان الملطخ بالدماء', 
+            'الحلقة 1165 — ذكريات قبل سبع عشرة سنة الحارسة', 
+            'الحلقة 1166 — ذكريات قبل سبع عشرة سنة اقتحام النزل', 
+            'الحلقة 1167 — ذكريات قبل سبع عشرة سنة -مناورة الوزير', 
+            'الحلقة 1168 — يوم الأنقليس', 
+            'الحلقة 1169 — الشبح آكل الطلاب -الجزء الأول', 
+            'الحلقة 1170 — الشبح آكل الطلاب -الجزء الثاني', 
+            'الحلقة 1171 — كيف صرت خادمها -الجزء الأول', 
+            'الحلقة 1172 — كيف صرت خادمها -الجزء الثاني', 
+            'الحلقة 1173 — شبح على سطح البناء', 
+            'الحلقة 1174 — أسطورة أوراشيما تارو -الجزء الأول', 
+            'الحلقة 1175 — أسطورة أوراشيما تارو- الجزء الثاني', 
+            'الحلقة 1176 — رحلة إلى موقع التصوير', 
+            'الحلقة 1177 — البحث عن حجة الغياب', 
+            'الحلقة 1178 — جمجمة جبل واشيو الملتهبة -الجزء الأول', 
+            'الحلقة 1179 — جمجمة جبل واشيو الملتهبة -الجزء الثاني', 
+            'الحلقة 1180 — الحلقة صفر - القط المحظوظ رأى كل شيء', 
+            'الحلقة 1181 — بوتشي يردّ الجميل',
+            'الحلقة 1182 — اعتقلوا ذلك الوجه',
+            'الحلقة 1183 — غرفة الاستجواب 3',
+            'الحلقة 1184 — مستودع الطوب الأحمر والخاطف المختفي (الجزء 1)',
+            'الحلقة 1185 — مستودع الطوب الأحمر والخاطف المختفي (الجزء 2)',
+            'الحلقة 1186 — لغز يوم البنات 4', 
+            'الحلقة 1187 — الحلقة صفر - قضية كودو شينتشي في حوض الأسماك', 'الحلقة 1188 — مطاردة لص الجواهر',
+            'الحلقة 1189 — حجة غياب مزدوجة', 'الحلقة 1190 — العاشق الذي اختفى على جسر كويتاني - 1',
+            'الحلقة 1191 — العاشق الذي اختفى على جسر كويتاني - 2', 'الحلقة 1192 — جريمة الكؤوس الثلاثة',
+            'الحلقة 1193 — كيد ضد هاكوبا: العرش اللازوردي - 1', 'الحلقة 1194 — كيد ضد هاكوبا: العرش اللازوردي - 2',
+            'الحلقة 1195 — لغز القصر الحلزوني - 1', 'الحلقة 1196 — لغز القصر الحلزوني - 2', 'الحلقة 1197 — اللصان الهاريبان',
+            'الحلقة 1198 — حذاء سندريلا', 'الحلقة 1199 — المتحرّون الصغار ضد المتحرّين الفضيين', 'الحلقة 1200 — الطرود المسروقة', 'الحلقة 1201 — انا الجاني',
+            'الحلقة 1202 — القوس الغربي لا يكذب','الحلقة 1202.5 — كيور آنسر','الحلقة 1203 — قصة كونان وسونوكووليلة الاشباح',
+            'الحلقة 1204 — كونان وأزوسا من الخاطف - الجزء الأول',
+            'الحلقة 1205 — كونان وأزوسا من الخاطف - الجزء الثاني',
+        ];
+        //const DESCS = ['','','','','','','','','','',''];
+        const SERVERS = [
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://pegasus.5387692.xyz/api/sp/hls/b50737b2-54ca-42b4-9557-09f160e1697a/playlist.m3u8' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://pegasus.5387692.xyz/api/sp/hls/fa79b658-f9f5-49ba-a49f-ba58ade83cd2/playlist.m3u8' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: 'https://ccdko80.com/videos/c25/EP983.mp4' }] },//983
+
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://pegasus.5387692.xyz/api/sp/hls/29ce3f34-7a15-4c26-99fe-69087807b493/playlist.m3u8' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://ccdko80.com/videos/c25/EP1159.mp4' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }] },
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://pegasus.5387692.xyz/api/sp/hls/3e9a94bd-6980-4ee7-8f73-e3d6100908a5/playlist.m3u8' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://ccdko80.com/videos/c25/EP1160.mp4' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }] },
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://pegasus.5387692.xyz/api/sp/hls/46a4b83e-95d8-4b2c-a1d4-cf4c5d118c1e/playlist.m3u8' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://ccdko80.com/videos/c25/EP1161.mp4' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }] },
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://pegasus.5387692.xyz/api/sp/hls/d76002ef-7d78-4ee8-8877-d576f35029d9/playlist.m3u8' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://ccdko80.com/videos/c25/EP1162.mp4' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }] },
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://pegasus.5387692.xyz/api/sp/hls/23c62de1-413e-47c5-bde6-8e9a86118adc/playlist.m3u8' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://ccdko80.com/videos/c25/EP1163.mp4' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }] },
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://pegasus.5387692.xyz/api/sp/hls/36e0ec70-f67a-4cec-b8f7-4f02c7cdb79b/playlist.m3u8' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://ccdko80.com/videos/c25/EP1164.mp4' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }] },
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://pegasus.5387692.xyz/api/sp/hls/9b6d07c4-8c86-4b9d-869f-b76f2e42b468/playlist.m3u8' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://ccdko80.com/videos/c25/EP1165.mp4' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }] },
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://pegasus.5387692.xyz/api/sp/hls/6cf6a0b0-7f67-4991-bb31-30aa59a004fb/playlist.m3u8' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://ccdko80.com/videos/c25/EP1166.mp4' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }] },
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://pegasus.5387692.xyz/api/sp/hls/e37e5eca-70d8-417f-9572-45932d052bf6/playlist.m3u8' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://ccdko80.com/videos/c25/EP1167.mp4' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }] },
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://pegasus.5387692.xyz/api/sp/hls/27d0311f-75fd-43c8-bf71-3c2a9133102e/playlist.m3u8' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://ccdko80.com/videos/c25/EP1168.mp4' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }] },
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://pegasus.5387692.xyz/api/sp/hls/e4fd8d1e-3290-4164-ad16-57da1e35c6c4/playlist.m3u8' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://ccdko80.com/videos/c25/EP1169.mp4' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }] },//1169
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://pegasus.5387692.xyz/api/sp/hls/76c2c7c4-97fd-4a0d-b39f-2b6f02bf29cb/playlist.m3u8' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://ccdko80.com/videos/c25/EP1170.mp4' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }] },//1170
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://pegasus.5387692.xyz/api/sp/hls/d077dc30-45a7-4fb2-a1c7-3d1e032d56d9/playlist.m3u8' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://ccdko80.com/videos/c25/EP1171.mp4' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }] },//1171
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://pegasus.5387692.xyz/api/sp/hls/c9fc7bac-12e7-4aa3-baa7-2e32392e065e/playlist.m3u8' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://ccdko80.com/videos/c25/EP1172.mp4' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }] },//1172
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://pegasus.5387692.xyz/api/sp/hls/7523d351-48c8-40c8-93f5-411d1857850b/playlist.m3u8' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://ccdko80.com/videos/c25/EP1173.mp4' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }] },//1173
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://pegasus.5387692.xyz/api/sp/hls/5b213224-99f5-4c12-ac2d-446cecf2847f/playlist.m3u8' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://ccdko80.com/videos/c25/EP1174.mp4' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }] },//1174
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://pegasus.5387692.xyz/api/sp/hls/d7a35ca6-34af-4d50-bea3-56311a0625f5/playlist.m3u8' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://ccdko80.com/videos/c25/EP1175.mp4' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }] },//1175
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://pegasus.5387692.xyz/api/sp/hls/3f7d4d67-f58f-472d-9664-b2f1c7bcc972/playlist.m3u8' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://ccdko80.com/videos/c25/EP1176.mp4' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }] },//1176
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://pegasus.5387692.xyz/api/sp/hls/c7b7ae04-9ced-4439-8c8f-0806da5cf75f/playlist.m3u8' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://ccdko80.com/videos/c25/EP1177.mp4' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }] },//1177
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://pegasus.5387692.xyz/api/sp/hls/71d3604e-a60b-46f7-9e4d-0127f5d1db0f/playlist.m3u8' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://ccdko80.com/videos/c25/EP1178.mp4' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }] },//1178
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://pegasus.5387692.xyz/api/sp/hls/45cc76e3-a581-4728-b6be-b658745bd57a/playlist.m3u8' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://ccdko80.com/videos/c25/EP1179.mp4' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }] },//1179
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://mega.nz/embed/fCQFkIxI#vdgJfhdw-z-tlueJPp1o9k8xJSoH9kaeQQ18VxaL4Ho' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://ccdko80.com/videos/c25/EP1180.mp4' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }] },//1180
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://mega.nz/embed/PXIVmKJa#Jd1VuDN-ascMrM7YjIiq52TjmFDYzJi12gphp3j4arY' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://ccdko80.com/videos/c25/EP1181.mp4' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }] },//1181
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://mega.nz/embed/HDRkWAxa#-VN1Xje5IAKcGK_GSOQID-RuVDes-D9CJwp7c8PPMfI' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://ccdko80.com/videos/c25/EP1182.mp4' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }] },//1182
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://mega.nz/embed/mLoi0TjR#aj1dTBcKrR1bYjfhNEeNSZfCA7Jj9Rh0xCUDOfml70Y' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://ccdko80.com/videos/c25/EP1183.mp4' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }] },//1183
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://mega.nz/embed/qShFgCQQ#cHv270h7Erz8GWkcGEgnF65zaBIvaoijN7UH0UqxLk8' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://ccdko80.com/videos/c25/EP1184.mp4' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }] },//1184
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://mega.nz/embed/LTomwapJ#joxgNFNGJL3rtRR-2RGGz6HdURnv0xCF9JVx7aBlfuw' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://ccdko80.com/videos/c25/EP1185.mp4' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }] },//1185
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://mega.nz/embed/PaIkEAIa#CSOk45KyVC96VmK1GIChiLcmyi0UjsFOUBV-28PM5K8' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: 'https://pegasus.5387692.xyz/api/sp/hls/201c7b1e-1c3b-4c51-bb65-4b29b623469b/playlist.m3u8' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://mega.nz/embed/GCJSQQrS#d-O_OvV0bGxR85-DnBMWQO-mTMnSQFXz2MbcZ0S_65o' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }] },//1186
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://drive.google.com/file/d/1bHu0MJ_bszY3aSnNvLHWG2EGHQJRM7ju/preview' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: 'https://videa.hu/player?v=DWvqcN9iYPU8mZKS' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://ccdko80.com/videos/c25/EP1187.mp4' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }] },
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://drive.google.com/file/d/1KOURhIFdcvbJ2EIgXE78pwI0tQfCWXgK/preview' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: 'https://videa.hu/player?v=7hLYO2C6IekNU4Hr' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://ccdko80.com/videos/c25/EP1188.mp4' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }] },
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://drive.google.com/file/d/1oIRwgUB-BpPdq3hfWueKgcyEWZtvWVaZ/preview' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: 'https://videa.hu/player?v=adSIFdCimy1mUUGc' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://ccdko80.com/videos/c25/EP1189.mp4' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }] },
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://mega.nz/embed/7WhW0CyL#4cxjcFjU5NIDCreH6if3h7QnUJ0VC5jScSBMxT4gD44' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: 'https://uqload.is/embed-i2vmat4ntu34.html' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://ccdko80.com/videos/c25/EP1190.mp4' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }] },
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://mega.nz/embed/HHREVBJQ#QQY1KzrPPkNLoGxL7XTHy9KQbG-W1fnn6bMT8HGndTc' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: 'https://uqload.is/embed-cxm7mk2x6uxs.html' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://ccdko80.com/videos/c25/EP1191.mp4' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }] },
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://mega.nz/embed/GOBBiZQa#mYhJL2jnO1OQMt39jI9oDK9DIa8Rz8MdvlE_OyT6pPM' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: 'https://uqload.is/embed-v0ephogl46cr.html' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://ccdko80.com/videos/c25/EP1192.mp4' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }] },
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://mega.nz/embed/bfQCSaTQ#4MMmW7waF2sgEQ4J401zpbjRwfjQe6W0Bf9ScuKPshI' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: 'https://uqload.is/embed-kprd38nvs1g6.html' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://ccdko80.com/videos/c25/EP1193.mp4' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }] },
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://mega.nz/embed/2XBgnZpZ#GjXuxHIJDjXIW1XmD-6KtUb9KMBxSEeJqJe4Sbq6-P8' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: 'https://vidmoly.biz/embed-4d8c7lkzr5gq.html' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://ccdko80.com/videos/c25/EP1194.mp4' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }] },
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://mega.nz/embed/eegnEYJJ#BosN3SKGCLWTBY9aAdn60hV-49U4iNt_dOwUoaojn54' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: 'https://uqload.is/embed-cex75tkdyc11.html' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://ccdko80.com/videos/c25/EP1195.mp4' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }] },
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://drive.google.com/file/d/1OPTQN7jpE5ApdzsAQoktpxSlufwdmpHR/preview' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: 'https://mp4upload.com/embed-5ht0r9b5w27v.html' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://ccdko80.com/videos/c25/EP1196.mp4' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }] },
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://drive.google.com/file/d/1RhHimRTLRd1m0rqWlbAe2Zvvs5Ftm0y0/preview' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: 'https://mega.nz/embed/Iu8XnaiQ#iYefwOkgkicAumnSppFLejsciWUMOh6Dzt0yNyJVLjY' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://drive.google.com/file/d/13qK07FzmpDnBaIuCJnAXFFF_2ZrFpuaT/preview' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: 'https://ccdko80.com/videos/c25/EP1197.mp4' }] },
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://drive.google.com/file/d/16XcnsSvZUp9OvNLJ67y5onZ5ZsFyGIvQ/preview' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: 'https://mega.nz/embed/GCQmUBwC#s05KqKRLb4SLY1-P2wA3x483V-RVfVGv5ghgXvD5vek' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://mega.nz/embed/mHwh2LzQ#nhW52a9WNg1WT1L6bjTEkxsGvT5rh24xMS8W1EeSDZU' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: 'https://ccdko80.com/videos/c25/EP1198.mp4' }] },
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://mega.nz/embed/zH4lVLYT#15y6u0Da6WxHhiRkYC5NKB1uC9ax1QZa27d66nPRozU' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: 'https://mp4upload.com/embed-bu1oi1n5bvxf.html' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://mega.nz/embed/DGZWjJIb#-DgtF6YGzbeIuSzSRd4qjS_f8HcQoMazZbdPxnO_Xu4' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: 'https://ccdko80.com/videos/c25/EP1199.mp4' }] },
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://mega.nz/embed/nCIEzJyA#4_90AxeTyFmrO8gknRw59RAJGakb2XKq8B6NUET54kQ' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://mega.nz/embed/iSAxDAxJ#98BMKo5sVF8hCjHQIX2J3ydP8SR7hqjF1q0aI75pEjM' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: 'https://ccdko80.com/videos/c25/EP1200.mp4' }] },
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://mega.nz/embed/yPBRDITZ#TZ0eXwM9AMrfa1_i90Jf9CeTbcZHdsM8y4r8fZagKsc' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: 'https://drive.google.com/file/d/116rW71FiRQDjpBA8uDDe8_YcpW7_lhro/preview' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://mega.nz/embed/WOpDAJ6B#OyAqSbJfxU00WiD6VhrX3KTHNrxnWTprOvd4NfF2IIs' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: 'https://ccdko80.com/videos/c25/EP1201.mp4' }] },
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://mega.nz/embed/jf4QGBjb#iGjbfVX2kp6-W-vrM8F1RMAaizlBBpGyAFs_bw7rv6Y' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: 'https://drive.google.com/file/d/1oF6a4K3eb3wLA-Czgs57VNqXAGYsiNk3/preview' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://mega.nz/embed/LSQwUYLK#eOWepAY2SRvN4NO4ZQlY3l0BdEO-UmeHFx7XpHL3Nzc' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: 'https://ccdko80.com/videos/c25/EP1202.mp4' }] },
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://mega.nz/embed/qDZyiAgK#8AWCJd6WNJVx2iHAP-n_kURvk_ZkqNAc5yA-s7KfpU4' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: 'https://drive.google.com/file/d/1IOqvCOyuyVfizv7QlX6ia7wdE0_oQkje/preview' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://mega.nz/embed/DXpBGYha#ajILqD2v9UixyiTzGHVHCzxozeQmz9VgwbOwifiwxgI' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }] },
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://mega.nz/embed/meRRlbxY#TfRacJNcxxcScNwv7ohCqw7yvQc30WYLqyt_6n53eUo' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: '' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }] },
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://mega.nz/embed/6TQlDC4K#hajZrXHpZ-_eANc3Dy__kVuHnG7osSn8uiSnqRTUfDg' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: '' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }] },
+            { sub: [{ name: 'سيرفر 1', icon: 'fa-server', url: 'https://mega.nz/embed/eKYX3ZoL#_P9y_ErbzSos6VHUc3HqfWCCiW9M_9s-hGRULS-WZAU' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }], dub: [{ name: 'سيرفر 1', icon: 'fa-server', url: '' }, { name: 'سيرفر 2', icon: 'fa-cloud', url: '' }] },
+        ];
+
+        function hasSub(i) { return SERVERS[i] && SERVERS[i].sub.some(s => s.url) }
+        function hasDub(i) { return SERVERS[i] && SERVERS[i].dub.some(s => s.url) }
+        function getSubServers(i) { return SERVERS[i] ? SERVERS[i].sub : [] }
+        function getDubServers(i) { return SERVERS[i] ? SERVERS[i].dub : [] }
+        function formatDate(d) { try { return new Date(d).toLocaleDateString('ar-SA', { month: 'short', day: 'numeric', year: 'numeric' }) } catch (e) { return '—' } }
+
+        const updateScrollProgress = throttle(() => {
+            const h = document.documentElement.scrollHeight - window.innerHeight;
+            document.getElementById('scrollProgress').style.width = (h > 0 ? (scrollY / h) * 100 : 0) + '%';
+        }, 50);
+        window.addEventListener('scroll', updateScrollProgress, { passive: true });
+
+        function openDrawer() { document.getElementById('mobileDrawer').classList.add('open'); document.getElementById('drawerOverlay').classList.add('open'); document.body.style.overflow = 'hidden' }
+        function closeDrawer() { document.getElementById('mobileDrawer').classList.remove('open'); document.getElementById('drawerOverlay').classList.remove('open'); document.body.style.overflow = '' }
+
+        const NEXT_EP_NUM = 1206;
+        function getNextAirDate() { const now = new Date(), d = new Date(now); let days = (6 - d.getUTCDay() + 7) % 7; if (days === 0) { const t = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), 9, 0, 0)); if (now >= t) days = 7 } return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() + days, 9, 0, 0)) }
+        let cdTarget = getNextAirDate(), cdInterval = null, cdPaused = false;
+        function pad(n) { return String(n).padStart(2, '0') }
+        function updateCountdown() { if (cdPaused) return; const diff = cdTarget - Date.now(); if (diff <= 0) { document.getElementById('cdTimer').style.display = 'none'; document.getElementById('cdDone').style.display = 'flex'; clearInterval(cdInterval); return } const t = Math.floor(diff / 1000), d = Math.floor(t / 86400), h = Math.floor((t % 86400) / 3600), m = Math.floor((t % 3600) / 60), s = t % 60; function sn(id, v) { const el = document.getElementById(id), nv = pad(v); if (el.textContent !== nv) { el.textContent = nv; el.classList.remove('flip'); void el.offsetWidth; el.classList.add('flip') } } sn('cdDays', d); sn('cdHours', h); sn('cdMins', m); sn('cdSecs', s) }
+        function initCountdown() {
+            document.getElementById('cdEpName').innerHTML = `الحلقة <span>${NEXT_EP_NUM}</span> — المحقق كونان`;
+            document.getElementById('cdDateStr').textContent = cdTarget.toLocaleDateString('ar-SA', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'Asia/Tokyo' });
+            updateCountdown();
+            cdInterval = setInterval(updateCountdown, 1000);
+            const cdObs = new IntersectionObserver(entries => { cdPaused = !entries[0].isIntersecting; }, { threshold: 0 });
+            cdObs.observe(document.getElementById('countdownSection'));
+        }
+
+        const THEME_KEY = 'conan_theme';
+
+        function applyTheme(theme) {
+            document.body.classList.toggle('light-theme', theme === 'light');
+            const toggleBtn = document.getElementById('themeToggle');
+            if (toggleBtn) {
+                toggleBtn.innerHTML = theme === 'light' ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+                toggleBtn.title = theme === 'light' ? 'الوضع الليلي' : 'الوضع النهاري';
+            }
+            const drawerThemeText = document.getElementById('drawerThemeText');
+            if (drawerThemeText) drawerThemeText.textContent = theme === 'light' ? 'الوضع الليلي' : 'الوضع النهاري';
+        }
+
+        function toggleTheme() {
+            const currentTheme = localStorage.getItem(THEME_KEY) || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            localStorage.setItem(THEME_KEY, newTheme);
+            applyTheme(newTheme);
+        }
+        window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', event => {
+            if (!localStorage.getItem(THEME_KEY)) applyTheme(event.matches ? 'light' : 'dark');
+        });
+
+        let currentFilter = 'all', showFavOnly = false, showDubOnly = false, _currentEpIdx = 0, _currentType = 'sub', _currentSrvIdx = 0;
+        let openDropdown = null;
+
+        // Unified watched episodes storage
+        let favs = JSON.parse(localStorage.getItem('gg_conan_all_fav_eps') || '[]');
+        let watchedEps = JSON.parse(localStorage.getItem('gg_conan_all_watched_eps') || '[]');
+        function isFav(id) { return favs.includes(id) }
+        function toggleFav(id, e) { e && e.stopPropagation(); if (isFav(id)) { favs = favs.filter(f => f !== id); toast('تم إزالته من المفضلة', 'warn') } else { favs.push(id); toast('تمت إضافته للمفضلة', 'success') } localStorage.setItem('new_conan_favs', JSON.stringify(favs)); updateFavUI(); updateFooterStats() }
+        function updateFavUI() { document.querySelectorAll('.fav-btn').forEach(b => { const bid = parseInt(b.dataset.id); b.classList.toggle('active', isFav(bid)); b.querySelector('i').className = isFav(bid) ? 'fas fa-heart' : 'far fa-heart' }) }
+        function toggleFavFilter() { showFavOnly = !showFavOnly; document.getElementById('favFilterBtn').classList.toggle('active', showFavOnly); if (showFavOnly && showDubOnly) { showDubOnly = false; document.getElementById('dubFilterBtn').classList.remove('active') } filterEpisodes() }
+        let showWatchedOnly = false; // New state for watched filter
+        function toggleDubFilter() { showDubOnly = !showDubOnly; document.getElementById('dubFilterBtn').classList.toggle('active', showDubOnly); if (showDubOnly && showFavOnly) { showFavOnly = false; document.getElementById('favFilterBtn').classList.remove('active') } filterEpisodes() }
+
+        let watchCount = parseInt(localStorage.getItem('gg_conan_all_watches') || '0');
+        function isWatched(id) { return watchedEps.includes(id) }
+        function toggleWatched(id, e) { e && e.stopPropagation(); if (isWatched(id)) { watchedEps = watchedEps.filter(w => w !== id); toast('تم إزالة الحلقة من المشاهدة', 'warn') } else { watchedEps.push(id); toast('تم وضع علامة "شوهدت"', 'success') } localStorage.setItem('new_conan_watched', JSON.stringify(watchedEps)); updateWatchedUI() }
+        function updateWatchedUI() { document.querySelectorAll('.watched-btn').forEach(b => { const bid = parseInt(b.dataset.id); const isActive = isWatched(bid); b.classList.toggle('active', isActive); b.querySelector('i').className = isActive ? 'fas fa-eye' : 'far fa-eye'; b.title = isActive ? 'تمت المشاهدة' : 'لم تتم المشاهدة' }) }
+
+        function updateFooterStats() {
+            document.getElementById('watchedFilterBtn').classList.toggle('active', showWatchedOnly); // Update filter button state
+            document.getElementById('eWatchCount').textContent = watchCount; document.getElementById('eFavCount').textContent = favs.length; let t = 0; SERVERS.forEach(s => { s.sub.forEach(x => { if (x.url) t++ }); s.dub.forEach(x => { if (x.url) t++ }) }); document.getElementById('eSrvCount').textContent = t
+        }
+
+        const canvas = document.getElementById('particles'), ctx = canvas.getContext('2d');
+        let particlesArr = [], particleRAF = null;
+
+        function resizeCanvas() {
+            canvas.width = IS_SMALL ? Math.floor(window.innerWidth * 0.5) : window.innerWidth;
+            canvas.height = IS_SMALL ? Math.floor(window.innerHeight * 0.5) : window.innerHeight;
+            canvas.style.width = '100%';
+            canvas.style.height = '100%';
+        }
+        resizeCanvas();
+        const throttledResize = throttle(() => { resizeCanvas(); initParticles(); }, 300);
+        window.addEventListener('resize', throttledResize);
+
+        class Particle {
+            constructor(simple) { this.reset(simple) }
+            reset(simple) {
+                this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height;
+                this.size = Math.random() * (simple ? 1.2 : 1.9) + 0.4;
+                this.speedX = (Math.random() - .5) * .28; this.speedY = (Math.random() - .5) * .28;
+                this.opacity = Math.random() * .42 + .1; this.isRed = Math.random() > .6; this.simple = simple;
+            }
+            update() { this.x += this.speedX; this.y += this.speedY; if (this.x < -10 || this.x > canvas.width + 10 || this.y < -10 || this.y > canvas.height + 10) this.reset(this.simple) }
+            draw() {
+                const c = this.isRed ? '232,25,44' : '26,111,170';
+                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(${c},${this.opacity})`; ctx.fill();
+                if (!this.simple) { ctx.beginPath(); ctx.arc(this.x, this.y, this.size * 3.5, 0, Math.PI * 2); ctx.fillStyle = `rgba(${c},${this.opacity * .1})`; ctx.fill() }
+            }
+        }
+
+        function initParticles() {
+            if (SKIP_PARTICLES) { canvas.style.display = 'none'; return }
+            canvas.style.display = '';
+            particlesArr = [];
+            const simple = IS_MOBILE;
+            const count = simple ? 10 : Math.min(40, Math.floor(window.innerWidth / 32));
+            for (let i = 0; i < count; i++)particlesArr.push(new Particle(simple));
+        }
+
+        function drawLines() {
+            if (IS_MOBILE) return;
+            const len = particlesArr.length;
+            for (let i = 0; i < len; i++) {
+                for (let j = i + 1; j < len; j++) {
+                    const dx = particlesArr[i].x - particlesArr[j].x, dy = particlesArr[i].y - particlesArr[j].y, d = dx * dx + dy * dy;
+                    if (d < 14400) { ctx.beginPath(); ctx.moveTo(particlesArr[i].x, particlesArr[i].y); ctx.lineTo(particlesArr[j].x, particlesArr[j].y); ctx.strokeStyle = `rgba(232,25,44,${(1 - Math.sqrt(d) / 120) * .06})`; ctx.lineWidth = .5; ctx.stroke() }
+                }
+            }
+        }
+
+        function animParticles() {
+            if (!pageVisible) { setTimeout(() => requestAnimationFrame(animParticles), 500); return }
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArr.length; i++) { particlesArr[i].update(); particlesArr[i].draw() }
+            drawLines();
+            particleRAF = requestAnimationFrame(animParticles);
+        }
+        initParticles();
+        if (!SKIP_PARTICLES) animParticles();
+
+        function animateCounters() { let avail = 0; EPISODES.forEach((_, i) => { if (hasSub(i) || hasDub(i)) avail++ }); const pct = Math.round((avail / EPISODES.length) * 100); animateNumber('totalEp', 0, EPISODES.length, 800); animateNumber('availEp', 0, avail, 800); document.getElementById('progressPercent').textContent = pct + '%'; setTimeout(() => { document.getElementById('progressFill').style.width = pct + '%' }, 300) }
+        function animateNumber(id, from, to, dur) { const el = document.getElementById(id); const start = performance.now(); function step(ts) { const p = Math.min((ts - start) / dur, 1); el.textContent = Math.round(from + (to - from) * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(step) } requestAnimationFrame(step) }
+
+        function toast(msg, type = 'info') { const icons = { success: 'fa-circle-check', info: 'fa-circle-info', warn: 'fa-triangle-exclamation', error: 'fa-circle-xmark' }; const t = document.createElement('div'); t.className = `toast toast-${type}`; t.innerHTML = `<i class="fas ${icons[type] || icons.info}"></i><span>${msg}</span>`; document.getElementById('toastBox').appendChild(t); setTimeout(() => { t.classList.add('out'); setTimeout(() => t.remove(), 300) }, 3000) }
+
+        const DESCS = [
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            'الحلقة 1187: حلقة خاصة تكشف عن تفاصيل جديدة في قضية كودو شينتشي في حوض الأسماك.',
+            'الحلقة 1188: مطاردة مثيرة للوصول إلى لص الجواهر الغامض قبل أن يختفي مجدداً.',
+            'الحلقة 1189: لغز حجة غياب مزدوجة يضع كونان أمام تحدٍ جديد في عالم الجريمة.',
+            'الحلقة 1190: الجزء الأول من قصة العاشق الذي اختفى بشكل غامض على جسر كويتاني.',
+            'الحلقة 1191: الجزء الثاني من قصة العاشق الذي اختفى على جسر كويتاني، مع تصاعد الأحداث.',
+            'الحلقة 1192: جريمة غامضة تتعلق بثلاثة كؤوس، وكونان يحاول فك رموزها.',
+            'الحلقة 1193: الجزء الأول من مواجهة كيد ضد هاكوبا حول العرش اللازوردي الأسطوري.',
+            'الحلقة 1194: الجزء الثاني من مواجهة كيد ضد هاكوبا، مع كشف المزيد من الأسرار.',
+            'الحلقة 1195: الجزء الأول من لغز القصر الحلزوني، حيث تتشابك الخيوط وتزداد التعقيدات.',
+            'الحلقة 1196: الجزء الثاني من لغز القصر الحلزوني، مع محاولة كونان الوصول للحقيقة.',
+            'الحلقة 1197: مغامرة جديدة مع اللصين الهاربين، وكونان في مطاردة مثيرة.',
+            'الحلقة 1198: لغز حذاء سندريلا يقود كونان إلى كشف جريمة خفية.',
+            'الحلقة 1199: مواجهة بين المتحرين الصغار والمتحرين الفضيين في قضية غامضة.',
+            'الحلقة 1200: قضية الطرود المسروقة التي تتطلب ذكاء كونان لحلها.',
+            'الحلقة 1201: أنا الجاني، حلقة تكشف عن هوية الجاني بطريقة غير متوقعة.',
+            'الحلقة 1202: ',
+            'الحلقة 1202.5: ',
+            'الحلقة 1203: ',
+            'الحلقة 1204: ',
+            'الحلقة 1205: ',
+            
+        ];
+        /* ═══════════════════════════════════════
+           القوائم المنسدلة — رفع z-index للبطاقة
+        ════════════════════════════════════════ */
+        function closeAllDropdowns() {
+            if (openDropdown) {
+                openDropdown.classList.remove('open');
+                /* إعادة z-index للبطاقة والزر */
+                if (openDropdown._parentCard) {
+                    openDropdown._parentCard.style.zIndex = '';
+                    openDropdown._parentCard = null;
+                }
+                if (openDropdown._parentBtnWrap) {
+                    openDropdown._parentBtnWrap.style.zIndex = '';
+                    openDropdown._parentBtnWrap = null;
+                }
+                openDropdown = null;
+            }
+        }
+
+        document.addEventListener('click', e => {
+            if (openDropdown && !e.target.closest('.btn-wrap')) {
+                closeAllDropdowns();
+            }
+        });
+
+        function toggleServerDrop(dropId, e) {
+            e.stopPropagation();
+            e.preventDefault();
+            const drop = document.getElementById(dropId);
+            const card = drop.closest('.card');
+            const btnWrap = drop.closest('.btn-wrap');
+
+            /* إغلاق القائمة السابقة وإعادة z-index */
+            if (openDropdown && openDropdown !== drop) {
+                openDropdown.classList.remove('open');
+                if (openDropdown._parentCard) {
+                    openDropdown._parentCard.style.zIndex = '';
+                }
+                if (openDropdown._parentBtnWrap) {
+                    openDropdown._parentBtnWrap.style.zIndex = '';
+                }
+            }
+
+            const willOpen = !drop.classList.contains('open');
+            drop.classList.toggle('open');
+
+            if (willOpen) {
+                /* رفع البطاقة والزر فوق كل العناصر الأخرى */
+                card.style.zIndex = '100';
+                btnWrap.style.zIndex = '200';
+                drop._parentCard = card;
+                drop._parentBtnWrap = btnWrap;
+                openDropdown = drop;
+            } else {
+                card.style.zIndex = '';
+                btnWrap.style.zIndex = '';
+                drop._parentCard = null;
+                drop._parentBtnWrap = null;
+                openDropdown = null;
+            }
+        }
+
+        function highlightText(text, q) { if (!q) return text; const s = q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); return text.replace(new RegExp(`(${s})`, 'gi'), '<mark>$1</mark>') }
+
+        function shareEpisode(epNum, e) { e && e.stopPropagation(); closeAllDropdowns(); const url = window.location.origin + window.location.pathname + '#ep-' + epNum; if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(url).then(() => toast('تم نسخ رابط الحلقة!', 'success')).catch(() => fallbackCopy(url)) } else { fallbackCopy(url) } }
+        function fallbackCopy(text) { const ta = document.createElement('textarea'); ta.value = text; ta.style.cssText = 'position:fixed;opacity:0'; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); toast('تم نسخ رابط الحلقة!', 'success') } catch (e) { toast('فشل النسخ', 'error') } document.body.removeChild(ta) }
+
+        function toggleShortcutsModal() { document.getElementById('shortcutsModal').classList.toggle('open') }
+
+        function render() {
+            const c = document.getElementById('container'); c.innerHTML = '';
+            let shown = 0;
+            const q = document.getElementById('searchInput').value.trim();
+
+            EPISODES.forEach((epNum, i) => {
+                const hs = hasSub(i), hd = hasDub(i);
+                const matchF = currentFilter === 'all' || (currentFilter === 'sub' && hs) || (currentFilter === 'dub' && hd) || (currentFilter === 'soon' && !hs && !hd);
+                const matchS = !q || TITLES[i].toLowerCase().includes(q.toLowerCase()) || String(epNum) === q || DESCS[i].toLowerCase().includes(q.toLowerCase());
+                const matchFav = !showFavOnly || isFav(epNum); // Existing fav filter
+                const matchWatched = !showWatchedOnly || isWatched(epNum); // New watched filter
+                const matchDub = !showDubOnly || hd;
+                if (!matchF || !matchS || !matchFav || !matchDub || !matchWatched) return; // Combine filters
+                shown++;
+
+                let pills = ''; if (hs) pills += '<span class="pill pill-sub">مترجم</span>'; if (hd) pills += '<span class="pill pill-dub">مدبلج</span>'; if (!hs && !hd) pills += '<span class="pill pill-soon">قريباً</span>';
+                const isRecent = i >= EPISODES.length - 2;
+                const newBadge = isRecent ? '<div class="new-badge">جديد</div>' : '';
+                const grad = EP_COLORS[i] || EP_COLORS[0];
+
+                const subServers = getSubServers(i); let subDropHTML = '';
+                if (subServers.length > 1) { let opts = ''; subServers.forEach((s, si) => { opts += `<div class="srv-opt" onclick="event.stopPropagation();closeAllDropdowns();openPlayer(${i},'sub',${si})"><div class="srv-icon red"><i class="fas ${s.icon || 'fa-server'}"></i></div><span class="srv-name">${s.name}</span><span class="srv-tag">${si === 0 ? 'MP4' : 'ALT'}</span></div>` }); subDropHTML = `<div class="server-drop" id="subDrop${i}">${opts}</div>` }
+
+                const dubServers = getDubServers(i); let dubDropHTML = '';
+                if (dubServers.length > 1) { let opts = ''; dubServers.forEach((s, si) => { opts += `<div class="srv-opt" onclick="event.stopPropagation();closeAllDropdowns();openPlayer(${i},'dub',${si})"><div class="srv-icon blue"><i class="fas ${s.icon || 'fa-server'}"></i></div><span class="srv-name">${s.name}</span><span class="srv-tag">${si === 0 ? 'MP4' : 'ALT'}</span></div>` }); dubDropHTML = `<div class="server-drop" id="dubDrop${i}">${opts}</div>` }
+
+                const subClick = hs ? (subServers.length > 1 ? `onclick="toggleServerDrop('subDrop${i}',event)"` : `onclick="openPlayer(${i},'sub',0)"`) : 'disabled';
+                const dubClick = hd ? (dubServers.length > 1 ? `onclick="toggleServerDrop('dubDrop${i}',event)"` : `onclick="openPlayer(${i},'dub',0)"`) : 'disabled';
+                const srvBadge = arr => arr.length > 1 ? `<span class="srv-count">${arr.length} سيرفرات</span>` : '';
+
+                const div = document.createElement('div');
+                div.className = 'card'; div.id = 'ep-' + epNum;
+                div.style.transitionDelay = Math.min(shown * 0.06, 0.6) + 's';
+                const fallbackImage = `https://placehold.co/300x420/0c1022/333?text=الحلقة%20${epNum}`; // Keep original fallback
+                div.innerHTML = `
+            <div class="poster">
+                <img src="ph/conan.jpg" alt="${TITLES[i]}" loading="lazy" 
+                     onerror="this.src='${fallbackImage}';this.style.filter='grayscale(100%) opacity(0.5)'">
+                <div class="poster-gradient" style="background:linear-gradient(135deg,${grad.from},${grad.to})"></div>
+                <div class="poster-scanline"></div>
+                ${newBadge}
+                <button class="watched-btn ${isWatched(epNum) ? 'active' : ''}" data-id="${epNum}" onclick="toggleWatched(${epNum},event)" title="${isWatched(epNum) ? 'تمت المشاهدة' : 'لم تتم المشاهدة'}">
+                    <i class="${isWatched(epNum) ? 'fas fa-eye' : 'far fa-eye'}"></i>
+                </button>
+                <div class="num-badge">#${epNum}</div>
+                <button class="fav-btn ${isFav(epNum) ? 'active' : ''}" data-id="${epNum}" onclick="toggleFav(${epNum},event)">
+                    <i class="${isFav(epNum) ? 'fas fa-heart' : 'far fa-heart'}"></i>
+                </button>
+                <div class="pills">${pills}</div>
+                <div class="play-hover"><div class="play-ring"><i class="fas fa-play"></i></div></div>
+            </div>
+            <div class="card-body">
+                <h3>${highlightText(TITLES[i], q)}</h3>
+                <p class="card-desc">${highlightText(DESCS[i], q)}</p>
+                <div class="card-date"><i class="fas fa-calendar-day"></i>${formatDate(EP_DATES[i])}</div>
+                <div class="btns">
+                    <div class="btn-wrap">
+                        <button class="btn btn-sub" ${subClick}><i class="fas fa-closed-captioning"></i> مترجم ${srvBadge(subServers)}</button>
+                        ${subDropHTML}
+                    </div>
+                    <div class="btn-wrap">
+                        <button class="btn btn-dub" ${dubClick}><i class="fas fa-microphone-lines"></i> مدبلج ${srvBadge(dubServers)}</button>
+                        ${dubDropHTML}
+                    </div>
+                </div>
+            </div>`;
+                if (hs || hd) { div.addEventListener('dblclick', () => { openPlayer(i, hs ? 'sub' : 'dub', 0) }) }
+                c.appendChild(div);
+            });
+
+            document.getElementById('visibleCount').textContent = shown;
+            if (shown === 0) c.innerHTML = `<div class="empty"><div class="empty-icon"><i class="fas fa-film"></i></div><p>${showDubOnly ? 'لا توجد حلقات مدبلجة متاحة حالياً' : showFavOnly ? 'لا توجد حلقات في المفضلة بعد' : 'لا توجد نتائج مطابقة'}</p><small>${showDubOnly ? 'تحقق لاحقاً من توفر الحلقات المدبلجة' : showFavOnly ? 'أضف حلقات للمفضلة بالنقر على أيقونة القلب' : 'جرب البحث بكلمات مختلفة'}</small></div>`;
+            requestAnimationFrame(() => { initScrollReveal(); if (!SKIP_TILT) initTiltAndSpotlight() });
+        }
+
+        let scrollObserver = null;
+        function initScrollReveal() {
+            if (scrollObserver) scrollObserver.disconnect();
+            scrollObserver = new IntersectionObserver(entries => {
+                for (let i = 0; i < entries.length; i++) {
+                    if (entries[i].isIntersecting) {
+                        entries[i].target.classList.add('visible');
+                        scrollObserver.unobserve(entries[i].target);
+                    }
+                }
+            }, { threshold: 0.03, rootMargin: '60px' });
+            document.querySelectorAll('.card:not(.visible)').forEach(c => scrollObserver.observe(c));
+        }
+
+        let tiltRAF = null;
+        function initTiltAndSpotlight() {
+            const cards = document.querySelectorAll('.card:not(.ts-init)');
+            if (!cards.length) return;
+            cards.forEach(card => card.classList.add('ts-init'));
+            const container = document.getElementById('container');
+            container.addEventListener('mousemove', handleTiltMove);
+            container.addEventListener('mouseleave', handleTiltLeave);
+        }
+
+        function handleTiltMove(e) {
+            if (tiltRAF) return;
+            tiltRAF = requestAnimationFrame(() => {
+                tiltRAF = null;
+                const card = e.target.closest('.card');
+                if (!card || document.getElementById('container').classList.contains('list')) return;
+                const r = card.getBoundingClientRect();
+                card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+                card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+                const rx = ((e.clientY - r.top - r.height / 2) / (r.height / 2)) * -5;
+                const ry = ((e.clientX - r.left - r.width / 2) / (r.width / 2)) * 5;
+                card.style.transform = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-8px)`;
+            });
+        }
+
+        function handleTiltLeave(e) {
+            const card = e.target.closest('.card');
+            if (card) card.style.transform = '';
+        }
+
+        function setFilter(f, el) { currentFilter = f; document.querySelectorAll('.chip').forEach(c => c.classList.remove('active')); el.classList.add('active'); render() }
+        function filterEpisodes() { render() }
+        function setView(mode) { const g = document.getElementById('container'); document.getElementById('vGrid').classList.toggle('active', mode === 'grid'); document.getElementById('vList').classList.toggle('active', mode === 'list'); g.classList.toggle('list', mode === 'list') }
+
+        const playerIframe = document.getElementById('player');
+
+        function openRandom() {
+            const idx = Math.floor(Math.random() * EPISODES.length);
+            const hasS = hasSub(idx), hasD = hasDub(idx);
+            if (!hasS && !hasD) return openRandom();
+            openPlayer(idx, hasS ? 'sub' : 'dub', 0);
+            toast('اخترنا لك حلقة عشوائية 🕵️', 'info');
+        }
+
+        let autoplayEnabled = localStorage.getItem('conan_autoplay') === 'true';
+        const autoplayToggle = document.getElementById('autoplayToggle');
+        if (autoplayToggle) {
+            autoplayToggle.checked = autoplayEnabled;
+            autoplayToggle.addEventListener('change', (e) => {
+                autoplayEnabled = e.target.checked;
+                localStorage.setItem('conan_autoplay', autoplayEnabled);
+            });
+        }
+
+        function updateContinueBtn() {
+            const idx = localStorage.getItem('conan_3_last_idx');
+            const btn = document.getElementById('continueBtn');
+            if (btn && idx !== null) btn.style.display = 'inline-flex';
+        }
+
+        function saveLastWatched(idx, type) {
+            localStorage.setItem('conan_3_last_idx', idx);
+            localStorage.setItem('conan_3_last_type', type);
+            updateContinueBtn();
+        }
+
+        function continueWatching() {
+            const idx = parseInt(localStorage.getItem('conan_3_last_idx'));
+            const type = localStorage.getItem('conan_3_last_type') || 'sub';
+            if (!isNaN(idx)) openPlayer(idx, type, 0);
+        }
+
+        function openPlayer(idx, type, srvIdx) {
+            _currentEpIdx = idx; _currentType = type; _currentSrvIdx = srvIdx || 0;
+            watchCount++; localStorage.setItem('gg_conan_all_watches', watchCount); updateFooterStats();
+            saveLastWatched(idx, type);
+
+            document.getElementById('pTitle').textContent = TITLES[idx];
+            const pType = document.getElementById('pType');
+            pType.textContent = type === 'dub' ? 'مدبلج' : 'مترجم';
+            pType.className = 'player-type ' + type;
+            document.getElementById('pNavInfo').textContent = EPISODES[idx] + ' / ' + EPISODES.length;
+            document.getElementById('pnPrev').disabled = false;
+            document.getElementById('pnNext').disabled = false;
+
+            const servers = type === 'sub' ? getSubServers(idx) : getDubServers(idx);
+            const srvContainer = document.getElementById('pServers');
+            srvContainer.innerHTML = '';
+            if (servers.length > 1) { servers.forEach((s, si) => { const btn = document.createElement('button'); btn.className = 'ps-btn' + (si === _currentSrvIdx ? (type === 'dub' ? ' dub-active' : ' active') : ''); btn.textContent = s.name; btn.onclick = () => switchServer(si); srvContainer.appendChild(btn) }) }
+
+            const url = servers[_currentSrvIdx] ? servers[_currentSrvIdx].url : '';
+            const loading = document.getElementById('pLoading');
+            loading.classList.remove('hide');
+
+            closeAllDropdowns();
+            document.getElementById('overlay').classList.add('open');
+            document.body.style.overflow = 'hidden';
+            closeDrawer();
+
+            if (url) {
+                setTimeout(() => {
+                    playerIframe.src = url;
+                    const hideLoading = () => loading.classList.add('hide');
+                    playerIframe.onload = hideLoading;
+                    setTimeout(hideLoading, 3000);
+                }, 120);
+                playerIframe.contentWindow.postMessage({ type: 'player_init', autoplay: autoplayEnabled }, '*');
+                playerIframe.addEventListener('ended', () => {
+                    if (autoplayEnabled) navigateEp(1);
+                }, { once: true });
+                toast(`جاري تشغيل ${TITLES[idx]}`, type === 'dub' ? 'info' : 'success');
+            } else {
+                toast('عذراً، هذا السيرفر غير متوفر حالياً', 'warn');
+                loading.classList.add('hide');
+            }
+        }
+
+        function switchServer(srvIdx) {
+            _currentSrvIdx = srvIdx;
+            const servers = _currentType === 'sub' ? getSubServers(_currentEpIdx) : getDubServers(_currentEpIdx);
+            const url = servers[srvIdx] ? servers[srvIdx].url : '';
+            document.querySelectorAll('#pServers .ps-btn').forEach((btn, i) => { btn.className = 'ps-btn' + (i === srvIdx ? (_currentType === 'dub' ? ' dub-active' : ' active') : '') });
+            const loading = document.getElementById('pLoading');
+            loading.classList.remove('hide');
+            if (url) {
+                playerIframe.src = 'about:blank';
+                setTimeout(() => {
+                    playerIframe.src = url;
+                    const hideLoading = () => loading.classList.add('hide');
+                    playerIframe.onload = hideLoading;
+                    setTimeout(hideLoading, 3000);
+                }, 80);
+                playerIframe.contentWindow.postMessage({ type: 'player_init', autoplay: autoplayEnabled }, '*');
+                playerIframe.addEventListener('ended', () => {
+                    if (autoplayEnabled) navigateEp(1);
+                }, { once: true });
+                toast(`تم التبديل إلى ${servers[srvIdx].name}`, 'info');
+            } else {
+                toast('عذراً، هذا السيرفر غير متوفر حالياً', 'warn');
+                loading.classList.add('hide');
+            }
+        }
+
+        function navigateEp(dir) { let n = _currentEpIdx + dir; if (n < 0) n = EPISODES.length - 1; if (n >= EPISODES.length) n = 0; openPlayer(n, _currentType, 0) }
+
+        function closePlayer() {
+            playerIframe.src = 'about:blank';
+            playerIframe.onload = null;
+            document.getElementById('overlay').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        function overlayClick(e) { if (e.target === document.getElementById('overlay')) closePlayer() }
+
+        document.addEventListener('keydown', e => {
+            if (document.activeElement.tagName === 'INPUT') return;
+            if (e.key === 'Escape') { if (document.getElementById('shortcutsModal').classList.contains('open')) { toggleShortcutsModal(); return } closePlayer(); return }
+            if (e.key === '?') { e.preventDefault(); toggleShortcutsModal(); return }
+            if (e.key === '/') { e.preventDefault(); document.getElementById('searchInput').focus(); return }
+            if (e.key === 'Home') { e.preventDefault(); scrollTo({ top: 0, behavior: 'smooth' }); return }
+            if (document.getElementById('overlay').classList.contains('open')) {
+                if (e.key === 'ArrowRight') { e.preventDefault(); navigateEp(1) }
+                if (e.key === 'ArrowLeft') { e.preventDefault(); navigateEp(-1) }
+                if (e.key === '1') switchServer(0);
+                if (e.key === '2') switchServer(1);
+            }
+        });
+
+        const throttledScrollTop = throttle(() => {
+            document.getElementById('scrollTop').classList.toggle('show', scrollY > 400);
+        }, 100);
+        window.addEventListener('scroll', throttledScrollTop, { passive: true });
+
+        function handleHash() { const hash = window.location.hash; if (hash.startsWith('#ep-')) { const epNum = parseInt(hash.replace('#ep-', '')); if (epNum) { setTimeout(() => { const card = document.getElementById('ep-' + epNum); if (card) { card.scrollIntoView({ behavior: 'smooth', block: 'center' }); card.classList.add('highlight'); setTimeout(() => card.classList.remove('highlight'), 5000) } }, 2600) } } }
+
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('intro').classList.add('hide');
+                setTimeout(() => { const intro = document.getElementById('intro'); if (intro) intro.remove(); }, 800);
+                updateWatchedUI(); // Update watched status on load
+            }, 2200);
+            const savedTheme = localStorage.getItem(THEME_KEY);
+            if (savedTheme) {
+                applyTheme(savedTheme);
+            } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+                applyTheme('light');
+            } else {
+                applyTheme('dark'); // Default to dark if no preference and not light system preference
+            }
+            render();
+            updateFooterStats();
+            initCountdown();
+            updateContinueBtn();
+            setTimeout(animateCounters, 2400);
+            handleHash();
+
+            // Register Service Worker
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js'));
+            }
+        });
+    </script>
+</body>
+
+</html>
